@@ -1,0 +1,305 @@
+{
+  "entities": [
+    {
+      "name": "Book",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_book",
+          "primary": true,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "name",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "author",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "language",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "isbn",
+          "primary": false,
+          "unique": false,
+          "nullable": true,
+          "type": "varchar(256)"
+        },
+        {
+          "name": "publication_date",
+          "primary": false,
+          "unique": false,
+          "nullable": true,
+          "type": "date"
+        },
+        {
+          "name": "category",
+          "primary": false,
+          "unique": false,
+          "nullable": true,
+          "type": null
+        },
+        {
+          "name": "genre",
+          "primary": false,
+          "unique": false,
+          "nullable": true,
+          "type": null
+        }
+      ],
+      "transform": {
+        "x": 725.3982893841845,
+        "y": -9.428553738436733,
+        "width": 198.77327065240775,
+        "height": 157.00000000000003
+      }
+    },
+    {
+      "name": "Borrowing",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_borrowing",
+          "primary": true,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "date",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": "date"
+        },
+        {
+          "name": "return_date",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": "date"
+        }
+      ],
+      "transform": {
+        "x": 466.83822670325907,
+        "y": 20.028023017631966,
+        "width": 169.74095153808588,
+        "height": 97.14285714285712
+      }
+    },
+    {
+      "name": "Location",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_location",
+          "primary": true,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "stand",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": "char(1)"
+        },
+        {
+          "name": "shelf",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": "smallint"
+        }
+      ],
+      "transform": {
+        "x": 1060.0649560508512,
+        "y": 19.19049388061086,
+        "width": 159.43993731907426,
+        "height": 99.64705294654487
+      }
+    },
+    {
+      "name": "User",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_user",
+          "primary": true,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        },
+        {
+          "name": "name",
+          "primary": false,
+          "unique": false,
+          "nullable": false,
+          "type": null
+        }
+      ],
+      "transform": {
+        "x": 492.1715600365924,
+        "y": 197.76192245203936,
+        "width": 142.28003038678844,
+        "height": 93.07562437511632
+      }
+    }
+  ],
+  "relations": [
+    [
+      {
+        "entity": "Borrowing",
+        "identifying": true,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 636.579178241345,
+            "y": 68.59945158906054,
+            "edge": 1
+          },
+          "points": [
+            {
+              "x": 680.9887338127647,
+              "y": 68.83544892531191
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Book",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 725.3982893841845,
+            "y": 69.07144626156328,
+            "edge": 3
+          },
+          "points": [
+            {
+              "x": 680.9887338127647,
+              "y": 68.83544892531191
+            }
+          ],
+          "manual": false
+        }
+      }
+    ],
+    [
+      {
+        "entity": "Location",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 1060.0649560508512,
+            "y": 69.0129714029614,
+            "edge": 3
+          },
+          "points": [
+            {
+              "x": 992.1182580437217,
+              "y": 69.04220883226235
+            }
+          ],
+          "manual": true
+        }
+      },
+      {
+        "entity": "Book",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 924.1715600365923,
+            "y": 69.0714462615633,
+            "edge": 1
+          },
+          "points": [
+            {
+              "x": 992.1182580437217,
+              "y": 69.04220883226235
+            }
+          ],
+          "manual": true
+        }
+      }
+    ],
+    [
+      {
+        "entity": "User",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 577.7849237567141,
+            "y": 197.76192245203936,
+            "edge": 0
+          },
+          "points": [
+            {
+              "x": 577.7453921397766,
+              "y": 157.46640130626423
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Borrowing",
+        "identifying": true,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 577.7058605228391,
+            "y": 117.17088016048909,
+            "edge": 2
+          },
+          "points": [
+            {
+              "x": 577.7453921397766,
+              "y": 157.46640130626423
+            }
+          ],
+          "manual": false
+        }
+      }
+    ]
+  ],
+  "notes": []
+}
