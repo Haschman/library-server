@@ -1,0 +1,221 @@
+{
+  "entities": [
+    {
+      "name": "Author",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_author",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "nationality",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "surname",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "century",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "Book",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_book",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "language",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "category",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        },
+        {
+          "name": "genre",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        },
+        {
+          "name": "isbn",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        },
+        {
+          "name": "publication_date",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "Borrowing",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_borrowing",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "date",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "return_date",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "Location",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_location",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "shelf",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "stand",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_user",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        }
+      ]
+    }
+  ],
+  "relations": [
+    [
+      {
+        "entity": "Book",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null
+      },
+      {
+        "entity": "Author",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null
+      }
+    ],
+    [
+      {
+        "entity": "Borrowing",
+        "identifying": true,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null
+      },
+      {
+        "entity": "Book",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null
+      }
+    ],
+    [
+      {
+        "entity": "Location",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null
+      },
+      {
+        "entity": "Book",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null
+      }
+    ],
+    [
+      {
+        "entity": "User",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null
+      },
+      {
+        "entity": "Borrowing",
+        "identifying": true,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null
+      }
+    ]
+  ],
+  "notes": []
+}
