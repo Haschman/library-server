@@ -8,63 +8,55 @@
           "name": "id_book",
           "primary": true,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "name",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "author",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "language",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "isbn",
           "primary": false,
           "unique": false,
-          "nullable": true,
-          "type": "varchar(256)"
+          "nullable": true
         },
         {
           "name": "publication_date",
           "primary": false,
           "unique": false,
-          "nullable": true,
-          "type": "date"
+          "nullable": true
         },
         {
           "name": "category",
           "primary": false,
           "unique": false,
-          "nullable": true,
-          "type": null
+          "nullable": true
         },
         {
           "name": "genre",
           "primary": false,
           "unique": false,
-          "nullable": true,
-          "type": null
+          "nullable": true
         }
       ],
       "transform": {
         "x": 725.3982893841845,
         "y": -9.428553738436733,
-        "width": 198.77327065240775,
+        "width": 187,
         "height": 157.00000000000003
       }
     },
@@ -76,28 +68,25 @@
           "name": "id_borrowing",
           "primary": true,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "date",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": "date"
+          "nullable": false
         },
         {
           "name": "return_date",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": "date"
+          "nullable": true
         }
       ],
       "transform": {
-        "x": 466.83822670325907,
+        "x": 518.8325428043332,
         "y": 20.028023017631966,
-        "width": 169.74095153808588,
+        "width": 117.74663543701172,
         "height": 97.14285714285712
       }
     },
@@ -109,28 +98,25 @@
           "name": "id_location",
           "primary": true,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "stand",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": "char(1)"
+          "nullable": false
         },
         {
           "name": "shelf",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": "smallint"
+          "nullable": false
         }
       ],
       "transform": {
         "x": 1060.0649560508512,
         "y": 19.19049388061086,
-        "width": 159.43993731907426,
+        "width": 121.7199677058627,
         "height": 99.64705294654487
       }
     },
@@ -142,21 +128,19 @@
           "name": "id_user",
           "primary": true,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         },
         {
           "name": "name",
           "primary": false,
           "unique": false,
-          "nullable": false,
-          "type": null
+          "nullable": false
         }
       ],
       "transform": {
-        "x": 492.1715600365924,
+        "x": 521.7792417651372,
         "y": 197.76192245203936,
-        "width": 142.28003038678844,
+        "width": 112.67234865824372,
         "height": 93.07562437511632
       }
     }
@@ -224,7 +208,7 @@
           },
           "points": [
             {
-              "x": 992.1182580437217,
+              "x": 986.2316227175179,
               "y": 69.04220883226235
             }
           ],
@@ -240,13 +224,13 @@
         "name": null,
         "transform": {
           "anchor": {
-            "x": 924.1715600365923,
+            "x": 912.3982893841845,
             "y": 69.0714462615633,
             "edge": 1
           },
           "points": [
             {
-              "x": 992.1182580437217,
+              "x": 986.2316227175179,
               "y": 69.04220883226235
             }
           ],
