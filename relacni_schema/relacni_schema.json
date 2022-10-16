@@ -1,11 +1,11 @@
 {
   "entities": [
     {
-      "name": "Book",
+      "name": "Author",
       "parent": null,
       "attr": [
         {
-          "name": "id_book",
+          "name": "id_author",
           "primary": true,
           "unique": false,
           "nullable": false
@@ -17,7 +17,43 @@
           "nullable": false
         },
         {
-          "name": "author",
+          "name": "surname",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "nationality",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "century",
+          "primary": false,
+          "unique": false,
+          "nullable": true
+        }
+      ],
+      "transform": {
+        "x": 741.7941071488516,
+        "y": 211.03852721931253,
+        "width": 157.49644875526428,
+        "height": 148.81813430786133
+      }
+    },
+    {
+      "name": "Book",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id_book",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
           "primary": false,
           "unique": false,
           "nullable": false
@@ -146,6 +182,52 @@
     }
   ],
   "relations": [
+    [
+      {
+        "entity": "Book",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 818.8982893841845,
+            "y": 147.5714462615633,
+            "edge": 2
+          },
+          "points": [
+            {
+              "x": 818.9015326783838,
+              "y": 179.30498674043793
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Author",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 818.9047759725829,
+            "y": 211.03852721931253,
+            "edge": 0
+          },
+          "points": [
+            {
+              "x": 818.9015326783838,
+              "y": 179.30498674043793
+            }
+          ],
+          "manual": false
+        }
+      }
+    ],
     [
       {
         "entity": "Borrowing",
