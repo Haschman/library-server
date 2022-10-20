@@ -3,7 +3,7 @@
 Práce bude zprostředkovávat správu domácí knihovny. Bude evidovat vlastněné knihy a jejich umístění v knihovně. Dále bude ukládat záznamy o výpůjčkách a kontrolovat dostupnost knih.</br>
 ### Relační schéma:
 <br>
-<p style="text-align:center;"><img src="./relacni_schema/relacni_schema.png" width=90%></p>
+<p style="text-align:center; width: 90%"><img src="./relacni_schema/relacni_schema.png" alt="Relacni schema"></p>
 <br>
 
 - každá kniha má vlastní **ID** pro identifikaci, **jméno knihy** a **jazyk**, ve kterém je napsána (nejčastěji čeština/angličtina). Její nepovinné atributy jsou **ISBN**, **datum vydání**, **kategorie**, která se rozděluje pouze na světovou a českou (přání klienta), a **literární žánr** (pravděpodobně bude zjednodušen hlavně na beletrii a poezii).
