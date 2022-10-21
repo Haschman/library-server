@@ -1,12 +1,11 @@
 package haschman.home_library.domain;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Vector;
 
 public class Book implements DomainEntity<Long>{
-    private Long id;
+    private long id;
     private String name;
     private String language;
 
