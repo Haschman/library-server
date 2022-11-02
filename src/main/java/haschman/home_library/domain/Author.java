@@ -1,25 +1,33 @@
 package haschman.home_library.domain;
 
-public class Author {
-    private long id;
+import java.util.Objects;
+
+public class Author implements DomainEntity<Long> {
+    private Long id;
     private String name;
     private String surname;
     private String nationality;
     private int century;
+    private Book book;
 
-    public Author(long id, String name, String surname, String nationality, int century) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.nationality = nationality;
-        this.century = century;
+    public Author() {
     }
 
-    public long getId() {
+    public Author(Long id, String name, String surname, String nationality, int century, Book book) {
+        this.id = id;
+        this.name = Objects.requireNonNull(name);
+        this.surname = Objects.requireNonNull(surname);
+        this.nationality = nationality;
+        this.century = century;
+        this.book = Objects.requireNonNull(book);
+    }
+
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,5 +61,13 @@ public class Author {
 
     public void setCentury(int century) {
         this.century = century;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

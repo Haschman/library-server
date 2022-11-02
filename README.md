@@ -17,3 +17,7 @@ Hlavní funkce celého programu bude evidence knih, takže bude muset umět ukl�
 Druhá větší funkcionalita bude půjčování knih. Při půjčení knihy bude muset program vytvořit nového uživatele nebo najít stávajícího a přidat k němu další výpůjčku. Zároveň bude muset najít žádanou knihu a zkontrolovat, zda je dostupná (nemá ji zrovna půjčenou někdo jiný). Jakmile proběhnou tyto kontroly, tak program vytvoří nový záznam s datem, kdy byla kniha zapůjčena. Ve chvíli kdy uživatel knihu vrátí, tak k výpůjčce přidá datum vrácení, tím se kniha stane opět dostupnou.<br>
 V programu bude možné vznést dotaz na vypsání všech současně zapůjčených knížek spolu s uživateli, kteří si knihu zapůjčili.<br>
 Knihy bude možné vyhledávat i podle autorů, národnosti autorů a v případě uvedení i podle období, ve kterém autoři vydávali.<br>
+<hr>
+
+## ToDo
+- Authorova národnost by měla být pouze dobrovolný atribut - změnit v relačním schématu
