@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class Book implements DomainEntity<Long>{
-    private long id;
+    private Long id;
     private String name;
     private String language;
 
@@ -14,9 +14,12 @@ public class Book implements DomainEntity<Long>{
     private String category;
     private String genre;
 
-    private Author author;
+    private Vector<Author> authors;
     private Vector<Borrowing> borrowings;
-    private Vector<Location> location;
+    private Location location;
+
+    public Book() {
+    }
 
     /**
      * Constructor
@@ -26,11 +29,11 @@ public class Book implements DomainEntity<Long>{
      * @param publication_date nullable
      * @param category nullable
      * @param genre nullable
-     * @param author required
+     * @param authors required
      * @param borrowings nullable
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, SimpleDateFormat publication_date, String category, String genre, Author author, Vector<Borrowing> borrowings, Vector<Location> location) {
+    public Book(Long id, String name, String language, Long ISBN, SimpleDateFormat publication_date, String category, String genre, Vector<Author> authors, Vector<Borrowing> borrowings, Location location) {
         this.id = id;
         this.name = name;
         this.language = language;
@@ -38,7 +41,7 @@ public class Book implements DomainEntity<Long>{
         this.publication_date = publication_date;
         this.category = category;
         this.genre = genre;
-        this.author = Objects.requireNonNull(author);
+        this.authors = Objects.requireNonNull(authors);
         this.borrowings = borrowings;
         this.location = Objects.requireNonNull(location);
     }
@@ -100,12 +103,12 @@ public class Book implements DomainEntity<Long>{
         this.genre = genre;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Vector<Author> getAuthor() {
+        return authors;
     }
 
     public void setAuthor(Author author) {
-        this.author = author;
+        authors.add(Objects.requireNonNull(author));
     }
 
     public Vector<Borrowing> getBorrowings() {
@@ -116,11 +119,11 @@ public class Book implements DomainEntity<Long>{
         borrowings.add(Objects.requireNonNull(borrowing));
     }
 
-    public Vector<Location> getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Vector<Location> location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 }
