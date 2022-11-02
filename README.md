@@ -22,3 +22,4 @@ Knihy bude možné vyhledávat i podle autorů, národnosti autorů a v případ
 ## ToDo
 - Authorova národnost by měla být pouze dobrovolný atribut - změnit v relačním schématu
 - Zjistit jak kontrolovat správnost parametrů u konstruktorů - příklad u Location
+- Zjistit jak udělat slabou entitu. Jak vracet několik ID a jak je ukládat.

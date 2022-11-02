@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class Borrowing implements DomainEntity<Long> {
     private Long id;
+    private Long id_book;
+    private Long id_user;
     private SimpleDateFormat date;
     private SimpleDateFormat return_date;
     private Book book;
@@ -18,7 +20,9 @@ public class Borrowing implements DomainEntity<Long> {
         this.date = Objects.requireNonNull(date);
         this.return_date = return_date;
         this.book = Objects.requireNonNull(book);
+        this.id_book = book.getId();
         this.user = Objects.requireNonNull(user);
+        this.id_user = user.getId();
     }
 
     @Override
