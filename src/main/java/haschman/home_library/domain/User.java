@@ -1,5 +1,7 @@
 package haschman.home_library.domain;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -34,11 +36,11 @@ public class User implements DomainEntity<Long> {
         this.name = name;
     }
 
-    public Vector<Borrowing> getBorrowings() {
-        return borrowings;
+    public Collection<Borrowing> getBorrowings() {
+        return Collections.unmodifiableCollection(borrowings);
     }
 
-    public void setBorrowings(Vector<Borrowing> borrowings) {
-        this.borrowings = borrowings;
+    public void addBorrowing(Borrowing borrowing) {
+        borrowings.add(Objects.requireNonNull(borrowing));
     }
 }
