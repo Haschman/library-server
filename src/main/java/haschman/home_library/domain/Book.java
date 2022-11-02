@@ -35,8 +35,8 @@ public class Book implements DomainEntity<Long>{
      */
     public Book(Long id, String name, String language, Long ISBN, SimpleDateFormat publication_date, String category, String genre, Vector<Author> authors, Vector<Borrowing> borrowings, Location location) {
         this.id = id;
-        this.name = name;
-        this.language = language;
+        this.name = Objects.requireNonNull(name);
+        this.language = Objects.requireNonNull(language);
         this.ISBN = ISBN;
         this.publication_date = publication_date;
         this.category = category;
