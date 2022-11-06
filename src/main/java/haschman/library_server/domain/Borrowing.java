@@ -1,15 +1,23 @@
 package haschman.library_server.domain;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
+@Entity
 public class Borrowing implements DomainEntity<Long> {
+    @Id
+    @GeneratedValue
     private Long id;
-    private Long id_book;
-    private Long id_user;
+    private Long id_book; // Foreign Key
+    private Long id_user; // Foreign Key
+    @Column(nullable = false)
     private SimpleDateFormat date;
+    @Column
     private SimpleDateFormat return_date;
+    @ManyToOne
     private Book book;
+    @ManyToOne
     private User user;
 
     public Borrowing() {

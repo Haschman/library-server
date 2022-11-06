@@ -1,15 +1,22 @@
 package haschman.library_server.domain;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Vector;
 
+@Entity
 public class Location implements DomainEntity<Long> {
+    @Id
+    @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private int stand;
+    @Column(nullable = false)
     private int shelf;
-    private Vector<Book> books;
+    @OneToMany
+    private Vector<Book> books = new Vector<>();
 
     public Location() {
     }
