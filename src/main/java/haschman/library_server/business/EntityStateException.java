@@ -8,6 +8,10 @@ public class EntityStateException extends RuntimeException {
         super("Illegal state of entity " + entity);
     }
 
+    public <E> EntityStateException(E entity, String s) {
+        super(entity + s);
+    }
+
     public EntityStateException(String s) {
         super(s);
     }
