@@ -1,21 +1,33 @@
 package haschman.library_server.domain;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.Vector;
 
+@Entity
 public class Book implements DomainEntity<Long>{
+    @Id
+    @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String language;
-
+    @Column
     private Long ISBN;
+    @Column
     private SimpleDateFormat publication_date;
+    @Column
     private String category;
+    @Column
     private String genre;
 
-    private Vector<Author> authors;
-    private Vector<Borrowing> borrowings;
+    @ManyToMany
+    private Vector<Author> authors = new Vector<>();
+    @OneToMany
+    private Vector<Borrowing> borrowings = new Vector<>();
+    @ManyToOne()
     private Location location;
 
     public Book() {
@@ -107,7 +119,7 @@ public class Book implements DomainEntity<Long>{
         return authors;
     }
 
-    public void setAuthor(Author author) {
+    public void addAuthor(Author author) {
         authors.add(Objects.requireNonNull(author));
     }
 

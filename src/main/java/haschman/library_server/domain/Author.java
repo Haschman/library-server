@@ -15,7 +15,9 @@ public class Author implements DomainEntity<Long> {
     private String name;
     @Column(nullable = false)
     private String surname;
+    @Column
     private String nationality;
+    @Column
     private int century;
     @ManyToMany
     private Vector<Book> books = new Vector<>();
