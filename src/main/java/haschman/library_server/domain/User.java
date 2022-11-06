@@ -1,14 +1,20 @@
 package haschman.library_server.domain;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Vector;
 
+@Entity
 public class User implements DomainEntity<Long> {
+    @Id
+    @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private String name;
-    private Vector<Borrowing> borrowings;
+    @OneToMany
+    private Vector<Borrowing> borrowings = new Vector<>();
 
     public User() {
     }
