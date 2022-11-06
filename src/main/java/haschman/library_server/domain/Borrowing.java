@@ -1,4 +1,4 @@
-package haschman.home_library.domain;
+package haschman.library_server.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Objects;
