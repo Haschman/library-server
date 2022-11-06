@@ -1,25 +1,35 @@
 package haschman.library_server.domain;
 
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Vector;
 
+@Entity
 public class Author implements DomainEntity<Long> {
+    @Id
+    @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String surname;
     private String nationality;
     private int century;
-    private Book book;
+    @ManyToMany
+    private Vector<Book> books = new Vector<>();
 
     public Author() {
     }
 
-    public Author(Long id, String name, String surname, String nationality, int century, Book book) {
+    public Author(Long id, String name, String surname, String nationality, int century, Vector<Book> books) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.surname = Objects.requireNonNull(surname);
         this.nationality = nationality;
         this.century = century;
-        this.book = Objects.requireNonNull(book);
+        this.books = Objects.requireNonNull(books);
     }
 
     @Override
@@ -63,11 +73,11 @@ public class Author implements DomainEntity<Long> {
         this.century = century;
     }
 
-    public Book getBook() {
-        return book;
+    public Collection<Book> getBooks() {
+        return Collections.unmodifiableCollection(books);
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void addBook(Book book) {
+        books.add(Objects.requireNonNull(book));
     }
 }
