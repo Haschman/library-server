@@ -1,12 +1,10 @@
 package haschman.library_server.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 @Entity
+@Table(name = "userrr")
 public class User implements DomainEntity<Long> {
     @Id
     @GeneratedValue
@@ -14,12 +12,12 @@ public class User implements DomainEntity<Long> {
     @Column(nullable = false)
     private String name;
     @OneToMany
-    private Vector<Borrowing> borrowings = new Vector<>();
+    private Set<Borrowing> borrowings = new HashSet<>();
 
     public User() {
     }
 
-    public User(Long id, String name, Vector<Borrowing> borrowings) {
+    public User(Long id, String name, Set<Borrowing> borrowings) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.borrowings = borrowings;

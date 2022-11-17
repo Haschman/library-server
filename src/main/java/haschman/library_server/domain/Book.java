@@ -2,8 +2,9 @@ package haschman.library_server.domain;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Objects;
-import java.util.Vector;
+import java.util.Set;
 
 @Entity
 public class Book implements DomainEntity<Long>{
@@ -24,9 +25,9 @@ public class Book implements DomainEntity<Long>{
     private String genre;
 
     @ManyToMany
-    private Vector<Author> authors = new Vector<>();
+    private Set<Author> authors = new HashSet<>();
     @OneToMany
-    private Vector<Borrowing> borrowings = new Vector<>();
+    private Set<Borrowing> borrowings = new HashSet<>();
     @ManyToOne()
     private Location location;
 
@@ -45,7 +46,7 @@ public class Book implements DomainEntity<Long>{
      * @param borrowings nullable
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, SimpleDateFormat publication_date, String category, String genre, Vector<Author> authors, Vector<Borrowing> borrowings, Location location) {
+    public Book(Long id, String name, String language, Long ISBN, SimpleDateFormat publication_date, String category, String genre, Set<Author> authors, Set<Borrowing> borrowings, Location location) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
@@ -115,7 +116,7 @@ public class Book implements DomainEntity<Long>{
         this.genre = genre;
     }
 
-    public Vector<Author> getAuthor() {
+    public Set<Author> getAuthor() {
         return authors;
     }
 
@@ -123,7 +124,7 @@ public class Book implements DomainEntity<Long>{
         authors.add(Objects.requireNonNull(author));
     }
 
-    public Vector<Borrowing> getBorrowings() {
+    public Set<Borrowing> getBorrowings() {
         return borrowings;
     }
 

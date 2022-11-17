@@ -1,10 +1,7 @@
 package haschman.library_server.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 @Entity
 public class Location implements DomainEntity<Long> {
@@ -16,12 +13,12 @@ public class Location implements DomainEntity<Long> {
     @Column(nullable = false)
     private int shelf;
     @OneToMany
-    private Vector<Book> books = new Vector<>();
+    private Set<Book> books = new HashSet<>();
 
     public Location() {
     }
 
-    public Location(Long id, int stand, int shelf, Vector<Book> books) {
+    public Location(Long id, int stand, int shelf, Set<Book> books) {
         this.id = id;
         if (stand < 0 || shelf < 0) throw new AssertionError();
         this.stand = stand;

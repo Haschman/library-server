@@ -1,10 +1,7 @@
 package haschman.library_server.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 @Entity
 public class Author implements DomainEntity<Long> {
@@ -20,12 +17,12 @@ public class Author implements DomainEntity<Long> {
     @Column
     private int century;
     @ManyToMany
-    private Vector<Book> books = new Vector<>();
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
     }
 
-    public Author(Long id, String name, String surname, String nationality, int century, Vector<Book> books) {
+    public Author(Long id, String name, String surname, String nationality, int century, Set<Book> books) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.surname = Objects.requireNonNull(surname);
