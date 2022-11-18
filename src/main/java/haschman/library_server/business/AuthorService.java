@@ -2,13 +2,12 @@ package haschman.library_server.business;
 
 import haschman.library_server.dao.AuthorRepository;
 import haschman.library_server.domain.Author;
-import haschman.library_server.domain.Book;
 import haschman.library_server.domain.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-@Service
+@Component
 public class AuthorService extends AbstractCrudService<User, Long> {
     public AuthorService(AuthorRepository authorRepository) {
         super(authorRepository);
