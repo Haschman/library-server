@@ -1,8 +1,8 @@
 package haschman.library_server.api.model;
 
 import org.springframework.data.util.Pair;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 public class BookDTO {
@@ -10,9 +10,10 @@ public class BookDTO {
     String name;
     String language;
     Long ISBN;
-    SimpleDriverDataSource publication_date;
+    SimpleDateFormat publication_date;
     String category;
     String genre;
+    // first -> stand; second -> shelf
     Pair<Integer, Integer> location;
     Set<Pair<String, String>> authors;
 
@@ -48,11 +49,11 @@ public class BookDTO {
         this.ISBN = ISBN;
     }
 
-    public SimpleDriverDataSource getPublication_date() {
+    public SimpleDateFormat getPublication_date() {
         return publication_date;
     }
 
-    public void setPublication_date(SimpleDriverDataSource publication_date) {
+    public void setPublication_date(SimpleDateFormat publication_date) {
         this.publication_date = publication_date;
     }
 
@@ -76,8 +77,12 @@ public class BookDTO {
         return location;
     }
 
-    public void setLocation(Pair<Integer, Integer> location) {
-        this.location = location;
+    /**
+     * @param stand is first
+     * @param shelf is second
+     */
+    public void setLocation(Integer stand, Integer shelf) {
+        this.location = Pair.of(stand, shelf);
     }
 
     public Set<Pair<String, String>> getAuthors() {
