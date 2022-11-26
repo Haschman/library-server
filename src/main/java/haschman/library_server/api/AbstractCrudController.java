@@ -34,7 +34,7 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") ID id) {
+    public void delete(@PathVariable("id") ID id) {
         service.deleteById(id);
     }
 }
