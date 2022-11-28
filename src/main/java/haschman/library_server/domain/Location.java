@@ -20,10 +20,15 @@ public class Location implements DomainEntity<Long> {
 
     public Location(Long id, int stand, int shelf, Set<Book> books) {
         this.id = id;
-        if (stand < 0 || shelf < 0) throw new AssertionError();
         this.stand = stand;
         this.shelf = shelf;
         this.books = books;
+    }
+
+    public Location(Long id, int stand, int shelf) {
+        this.id = id;
+        this.stand = stand;
+        this.shelf = shelf;
     }
 
     @Override
