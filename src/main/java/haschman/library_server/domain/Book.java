@@ -1,7 +1,10 @@
 package haschman.library_server.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.util.Pair;
+
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,7 +21,7 @@ public class Book implements DomainEntity<Long>{
     @Column
     private Long ISBN;
     @Column
-    private SimpleDateFormat publication_date;
+    private Date publication_date;
     @Column
     private String category;
     @Column
@@ -36,6 +39,7 @@ public class Book implements DomainEntity<Long>{
 
     /**
      * Constructor
+     * @param id required
      * @param name required
      * @param language required
      * @param ISBN nullable
@@ -46,7 +50,7 @@ public class Book implements DomainEntity<Long>{
      * @param borrowings nullable
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, SimpleDateFormat publication_date, String category, String genre, Set<Author> authors, Set<Borrowing> borrowings, Location location) {
+    public Book(Long id, String name, String language, Long ISBN, Date publication_date, String category, String genre, Set<Author> authors, Set<Borrowing> borrowings, Location location) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
@@ -57,6 +61,29 @@ public class Book implements DomainEntity<Long>{
         this.authors = Objects.requireNonNull(authors);
         this.borrowings = borrowings;
         this.location = Objects.requireNonNull(location);
+    }
+
+    // Without borrowings
+    public Book(Long id, String name, String language, Long ISBN, Date publication_date, String category, String genre, Set<Author> authors, Location location) {
+        this.id = id;
+        this.name = Objects.requireNonNull(name);
+        this.language = Objects.requireNonNull(language);
+        this.ISBN = ISBN;
+        this.publication_date = publication_date;
+        this.category = category;
+        this.genre = genre;
+        this.authors = Objects.requireNonNull(authors);
+        this.location = Objects.requireNonNull(location);
+    }
+
+    public Book(Long id, String name, String language, Long ISBN, Date publication_date, String category, String genre) {
+        this.id = id;
+        this.name = Objects.requireNonNull(name);
+        this.language = Objects.requireNonNull(language);
+        this.ISBN = ISBN;
+        this.publication_date = publication_date;
+        this.category = category;
+        this.genre = genre;
     }
 
     @Override
@@ -92,11 +119,11 @@ public class Book implements DomainEntity<Long>{
         this.ISBN = ISBN;
     }
 
-    public SimpleDateFormat getPublication_date() {
+    public Date getPublication_date() {
         return publication_date;
     }
 
-    public void setPublication_date(SimpleDateFormat publication_date) {
+    public void setPublication_date(Date publication_date) {
         this.publication_date = publication_date;
     }
 

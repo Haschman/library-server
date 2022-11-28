@@ -1,8 +1,9 @@
 package haschman.library_server.api.model;
 
-import org.springframework.data.util.Pair;
+import haschman.library_server.domain.Author;
+import haschman.library_server.domain.Location;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 public class BookDTO {
@@ -10,12 +11,11 @@ public class BookDTO {
     String name;
     String language;
     Long ISBN;
-    SimpleDateFormat publication_date;
+    Date publication_date;
     String category;
     String genre;
-    // first -> stand; second -> shelf
-    Pair<Integer, Integer> location;
-    Set<Pair<String, String>> authors;
+    Location location;
+    Set<Author> authors;
 
     public Long getId() {
         return id;
@@ -49,12 +49,13 @@ public class BookDTO {
         this.ISBN = ISBN;
     }
 
-    public SimpleDateFormat getPublication_date() {
+    public Date getPublication_date() {
         return publication_date;
     }
 
-    public void setPublication_date(SimpleDateFormat publication_date) {
-        this.publication_date = publication_date;
+    public void setPublication_date(Date publication_dateS) {
+        // format yyyy-MM-dd
+        this.publication_date = publication_dateS;
     }
 
     public String getCategory() {
@@ -73,23 +74,19 @@ public class BookDTO {
         this.genre = genre;
     }
 
-    public Pair<Integer, Integer> getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    /**
-     * @param stand is first
-     * @param shelf is second
-     */
-    public void setLocation(Integer stand, Integer shelf) {
-        this.location = Pair.of(stand, shelf);
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public Set<Pair<String, String>> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Pair<String, String>> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 }
