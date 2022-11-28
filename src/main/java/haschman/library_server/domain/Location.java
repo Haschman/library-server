@@ -4,15 +4,17 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@Table(name = "location")
 public class Location implements DomainEntity<Long> {
     @Id
     @GeneratedValue
+    @Column(name = "id_location")
     private Long id;
     @Column(nullable = false)
     private int stand;
     @Column(nullable = false)
     private int shelf;
-    @OneToMany
+    @OneToMany(mappedBy = "name")
     private Set<Book> books = new HashSet<>();
 
     public Location() {

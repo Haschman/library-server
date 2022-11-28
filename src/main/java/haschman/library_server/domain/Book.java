@@ -31,7 +31,8 @@ public class Book implements DomainEntity<Long>{
     private Set<Author> authors = new HashSet<>();
     @OneToMany
     private Set<Borrowing> borrowings = new HashSet<>();
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name="id_location")
     private Location location;
 
     public Book() {
