@@ -39,6 +39,12 @@ public class Author implements DomainEntity<Long> {
         this.century = century;
     }
 
+    public Author(Long id, String name, String surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+    }
+
     @Override
     public Long getId() {
         return id;
