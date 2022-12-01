@@ -17,6 +17,7 @@ public class Author implements DomainEntity<Long> {
     @Column
     private int century;
     @ManyToMany
+    @JoinTable(name = "book_authors", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books = new HashSet<>();
 
     public Author() {

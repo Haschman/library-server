@@ -28,11 +28,11 @@ public class Book implements DomainEntity<Long>{
     private String genre;
 
     @ManyToMany
+    @JoinTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private Set<Borrowing> borrowings = new HashSet<>();
     @ManyToOne
-    @JoinColumn(name="id_location")
     private Location location;
 
     public Book() {

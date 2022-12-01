@@ -9,8 +9,6 @@ public class Borrowing implements DomainEntity<Long> {
     @Id
     @GeneratedValue
     private Long id;
-    private Long id_book; // Foreign Key
-    private Long id_user; // Foreign Key
     @Column(nullable = false)
     private SimpleDateFormat date;
     @Column
@@ -28,9 +26,7 @@ public class Borrowing implements DomainEntity<Long> {
         this.date = Objects.requireNonNull(date);
         this.return_date = return_date;
         this.book = Objects.requireNonNull(book);
-        this.id_book = book.getId();
         this.user = Objects.requireNonNull(user);
-        this.id_user = user.getId();
     }
 
     @Override

@@ -13,7 +13,7 @@ services:
     volumes:
       - .docker/postgres-data:/var/lib/postgresql/data
   api:
-    image: library_server.api
+    image: docker.io/library/library_server.api:latest
     depends_on:
       - postgres
     ports:

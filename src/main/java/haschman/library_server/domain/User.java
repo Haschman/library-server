@@ -11,7 +11,7 @@ public class User implements DomainEntity<Long> {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private Set<Borrowing> borrowings = new HashSet<>();
 
     public User() {
