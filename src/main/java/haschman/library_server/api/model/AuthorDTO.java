@@ -1,11 +1,15 @@
 package haschman.library_server.api.model;
 
+import java.util.Set;
+
 public class AuthorDTO {
     Long id;
     String name;
     String surname;
     String nationality;
     int century;
+
+    Set<String> books;
 
     public Long getId() {
         return id;
@@ -45,5 +49,13 @@ public class AuthorDTO {
 
     public void setCentury(int century) {
         this.century = century;
+    }
+
+    public Set<String> getBooks() {
+        return books;
+    }
+
+    public void addBook(String book) {
+        this.books.add(book);
     }
 }
