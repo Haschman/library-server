@@ -11,7 +11,6 @@ public class LocationToDTOConverter implements Function<Location, LocationDTO> {
     @Override
     public LocationDTO apply(Location location) {
         LocationDTO locationDTO = new LocationDTO();
-        locationDTO.setId(location.getId());
         locationDTO.setStand(location.getStand());
         locationDTO.setShelf(location.getShelf());
         return locationDTO;

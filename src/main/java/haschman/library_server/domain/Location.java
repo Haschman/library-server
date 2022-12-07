@@ -6,7 +6,7 @@ import java.util.*;
 @Entity
 public class Location implements DomainEntity<Long> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
     private int stand;
@@ -18,15 +18,13 @@ public class Location implements DomainEntity<Long> {
     public Location() {
     }
 
-    public Location(Long id, int stand, int shelf, Set<Book> books) {
-        this.id = id;
+    public Location(int stand, int shelf, Set<Book> books) {
         this.stand = stand;
         this.shelf = shelf;
         this.books = books;
     }
 
-    public Location(Long id, int stand, int shelf) {
-        this.id = id;
+    public Location(int stand, int shelf) {
         this.stand = stand;
         this.shelf = shelf;
     }
@@ -62,5 +60,18 @@ public class Location implements DomainEntity<Long> {
 
     public void addBook(Book book) {
         books.add(Objects.requireNonNull(book));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return stand == location.stand && shelf == location.shelf;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stand, shelf);
     }
 }

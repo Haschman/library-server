@@ -1,10 +1,11 @@
 package haschman.library_server.api.model;
 
 public class LocationDTO {
-    Long id;
+    //Long id;
     int stand;
     int shelf;
 
+    /*
     public Long getId() {
         return id;
     }
@@ -12,6 +13,7 @@ public class LocationDTO {
     public void setId(Long id) {
         this.id = id;
     }
+     */
 
     public int getStand() {
         return stand;
