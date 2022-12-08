@@ -21,11 +21,4 @@ public class LocationService extends AbstractCrudService<Location, Long> {
                 return Optional.of(intruder);
         return Optional.empty();
     }
-
-    @Override
-    public Location create(Location location) throws EntityStateException {
-        if (findLocation(location.getStand(), location.getShelf()).isPresent())
-            throw new EntityStateException(location, " already exists");
-        return repository.save(location);
-    }
 }

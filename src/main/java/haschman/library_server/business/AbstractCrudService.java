@@ -19,8 +19,10 @@ public abstract class AbstractCrudService<E extends DomainEntity<ID>, ID> {
     }
 
     public E create(E entity) throws EntityStateException {
-        if (repository.existsById(entity.getId()))
-            throw new EntityStateException(entity, " already exists!");
+        Collection<E> all = repository.findAll();
+        for (var one : all)
+            if (one.equals(entity))
+                throw new EntityStateException(entity, " already exists!");
         return repository.save(entity);
     }
 
