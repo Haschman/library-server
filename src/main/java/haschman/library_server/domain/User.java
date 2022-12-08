@@ -11,16 +11,13 @@ public class User implements DomainEntity<Long> {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @OneToMany(mappedBy = "id")
-    private Set<Borrowing> borrowings = new HashSet<>();
 
     public User() {
     }
 
-    public User(Long id, String name, Set<Borrowing> borrowings) {
+    public User(Long id, String name) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
-        this.borrowings = borrowings;
     }
 
     @Override
@@ -40,11 +37,4 @@ public class User implements DomainEntity<Long> {
         this.name = name;
     }
 
-    public Collection<Borrowing> getBorrowings() {
-        return Collections.unmodifiableCollection(borrowings);
-    }
-
-    public void addBorrowing(Borrowing borrowing) {
-        borrowings.add(Objects.requireNonNull(borrowing));
-    }
 }

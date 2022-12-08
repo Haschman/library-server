@@ -14,8 +14,10 @@ public class Borrowing implements DomainEntity<Long> {
     @Column
     private SimpleDateFormat return_date;
     @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Borrowing() {
