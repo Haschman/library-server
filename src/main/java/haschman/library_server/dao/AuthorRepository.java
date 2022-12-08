@@ -10,6 +10,4 @@ import java.util.Collection;
 
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long>, JpaRepository<Author, Long> {
-    @Query(value = "select a from Author a join Book b where b.id = :bookId")
-    Collection<Author> findAllAuthorsOfBook(@Param("bookId") Long bookId);
 }

@@ -16,20 +16,22 @@ public class Author implements DomainEntity<Long> {
     private String nationality;
     @Column
     private int century;
-    @ManyToMany
-    @JoinTable(name = "book_authors", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private Set<Book> books = new HashSet<>();
-
     public Author() {
     }
 
-    public Author(Long id, String name, String surname, String nationality, int century, Set<Book> books) {
+    public Author(Long id, String name, String surname, String nationality, int century) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.surname = Objects.requireNonNull(surname);
         this.nationality = nationality;
         this.century = century;
-        this.books = Objects.requireNonNull(books);
+    }
+
+    public Author(String name, String surname, String nationality, int century) {
+        this.name = name;
+        this.surname = surname;
+        this.nationality = nationality;
+        this.century = century;
     }
 
     @Override
@@ -73,11 +75,16 @@ public class Author implements DomainEntity<Long> {
         this.century = century;
     }
 
-    public Collection<Book> getBooks() {
-        return Collections.unmodifiableCollection(books);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return century == author.century && Objects.equals(name, author.name) && Objects.equals(surname, author.surname) && Objects.equals(nationality, author.nationality);
     }
 
-    public void addBook(Book book) {
-        books.add(Objects.requireNonNull(book));
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -13,16 +13,11 @@ public class AuthorToDTOConverter implements Function<Author, AuthorDTO> {
     @Override
     public AuthorDTO apply(Author author) {
         AuthorDTO authorDTO = new AuthorDTO();
-        authorDTO.setId(author.getId());
+
         authorDTO.setName(author.getName());
         authorDTO.setSurname(author.getSurname());
         authorDTO.setNationality(author.getNationality());
         authorDTO.setCentury(author.getCentury());
-
-        Collection<Book> books = author.getBooks();
-        for (var book:books) {
-            authorDTO.addBook(book.getName());
-        }
 
         return authorDTO;
     }
