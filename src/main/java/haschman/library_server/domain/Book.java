@@ -1,8 +1,5 @@
 package haschman.library_server.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.util.Pair;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -27,12 +24,11 @@ public class Book implements DomainEntity<Long>{
     @Column
     private String genre;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
-    @OneToMany(mappedBy = "id")
-    private Set<Borrowing> borrowings = new HashSet<>();
-    @ManyToOne
+
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Location location;
 
     public Book() {
@@ -40,7 +36,6 @@ public class Book implements DomainEntity<Long>{
 
     /**
      * Constructor
-     * @param id required
      * @param name required
      * @param language required
      * @param ISBN nullable
@@ -48,11 +43,9 @@ public class Book implements DomainEntity<Long>{
      * @param category nullable
      * @param genre nullable
      * @param authors required
-     * @param borrowings nullable
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, Date publication_date, String category, String genre, Set<Author> authors, Set<Borrowing> borrowings, Location location) {
-        this.id = id;
+    public Book(String name, String language, Long ISBN, Date publication_date, String category, String genre, Set<Author> authors, Location location) {
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
         this.ISBN = ISBN;
@@ -60,31 +53,7 @@ public class Book implements DomainEntity<Long>{
         this.category = category;
         this.genre = genre;
         this.authors = Objects.requireNonNull(authors);
-        this.borrowings = borrowings;
-        this.location = Objects.requireNonNull(location);
-    }
-
-    // Without borrowings
-    public Book(Long id, String name, String language, Long ISBN, Date publication_date, String category, String genre, Set<Author> authors, Location location) {
-        this.id = id;
-        this.name = Objects.requireNonNull(name);
-        this.language = Objects.requireNonNull(language);
-        this.ISBN = ISBN;
-        this.publication_date = publication_date;
-        this.category = category;
-        this.genre = genre;
-        this.authors = Objects.requireNonNull(authors);
-        this.location = Objects.requireNonNull(location);
-    }
-
-    public Book(Long id, String name, String language, Long ISBN, Date publication_date, String category, String genre) {
-        this.id = id;
-        this.name = Objects.requireNonNull(name);
-        this.language = Objects.requireNonNull(language);
-        this.ISBN = ISBN;
-        this.publication_date = publication_date;
-        this.category = category;
-        this.genre = genre;
+        //this.borrowings = borrowings;        this.location = Objects.requireNonNull(location);
     }
 
     @Override
@@ -152,19 +121,23 @@ public class Book implements DomainEntity<Long>{
         authors.add(Objects.requireNonNull(author));
     }
 
-    public Set<Borrowing> getBorrowings() {
-        return borrowings;
-    }
-
-    public void addBorrowing (Borrowing borrowing) {
-        borrowings.add(Objects.requireNonNull(borrowing));
-    }
-
     public Location getLocation() {
         return location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book book)) return false;
+        return name.equals(book.name) && Objects.equals(language, book.language) && Objects.equals(ISBN, book.ISBN) && Objects.equals(publication_date, book.publication_date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
