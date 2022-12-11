@@ -1,7 +1,6 @@
 package haschman.library_server.domain;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,7 +17,7 @@ public class Book implements DomainEntity<Long>{
     @Column
     private Long ISBN;
     @Column
-    private Date publication_date;
+    private Integer publication_year;
     @Column
     private String category;
     @Column
@@ -39,17 +38,17 @@ public class Book implements DomainEntity<Long>{
      * @param name required
      * @param language required
      * @param ISBN nullable
-     * @param publication_date nullable
+     * @param publication_year nullable
      * @param category nullable
      * @param genre nullable
      * @param authors required
      * @param location required
      */
-    public Book(String name, String language, Long ISBN, Date publication_date, String category, String genre, Set<Author> authors, Location location) {
+    public Book(String name, String language, Long ISBN, Integer publication_year, String category, String genre, Set<Author> authors, Location location) {
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
         this.ISBN = ISBN;
-        this.publication_date = publication_date;
+        this.publication_year = publication_year;
         this.category = category;
         this.genre = genre;
         this.authors = Objects.requireNonNull(authors);
@@ -89,12 +88,12 @@ public class Book implements DomainEntity<Long>{
         this.ISBN = ISBN;
     }
 
-    public Date getPublication_date() {
-        return publication_date;
+    public Integer getPublication_year() {
+        return publication_year;
     }
 
-    public void setPublication_date(Date publication_date) {
-        this.publication_date = publication_date;
+    public void setPublication_year(Integer publication_date) {
+        this.publication_year = publication_date;
     }
 
     public String getCategory() {
@@ -132,12 +131,14 @@ public class Book implements DomainEntity<Long>{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Book book)) return false;
-        return name.equals(book.name) && Objects.equals(language, book.language) && Objects.equals(ISBN, book.ISBN) && Objects.equals(publication_date, book.publication_date);
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+
+        return name.equals(book.name) && Objects.equals(language, book.language) && Objects.equals(ISBN, book.ISBN) && Objects.equals(publication_year, book.publication_year) && authors.equals(book.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name, language, ISBN, publication_year);
     }
 }
