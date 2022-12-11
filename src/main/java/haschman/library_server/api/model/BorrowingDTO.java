@@ -3,11 +3,11 @@ package haschman.library_server.api.model;
 import java.text.SimpleDateFormat;
 
 public class BorrowingDTO {
-    Long id;
-    String bookName;
-    String userName;
-    SimpleDateFormat date;
-    SimpleDateFormat returnDate;
+    private Long id;
+    private String bookName;
+    private String userName;
+    private SimpleDateFormat date;
+    private SimpleDateFormat returnDate;
 
     public Long getId() {
         return id;

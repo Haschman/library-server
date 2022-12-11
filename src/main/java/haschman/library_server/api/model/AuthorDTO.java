@@ -3,11 +3,10 @@ package haschman.library_server.api.model;
 import java.util.Set;
 
 public class AuthorDTO {
-//    Long id;
-    String name;
-    String surname;
-    String nationality;
-    int century;
+    private String name;
+    private String surname;
+    private String nationality;
+    private int century;
 
     public String getName() {
         return name;

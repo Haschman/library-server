@@ -1,19 +1,8 @@
 package haschman.library_server.api.model;
 
 public class LocationDTO {
-    //Long id;
-    int stand;
-    int shelf;
-
-    /*
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-     */
+    private int stand;
+    private int shelf;
 
     public int getStand() {
         return stand;

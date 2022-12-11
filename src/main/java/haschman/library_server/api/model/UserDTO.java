@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Set;
 
 public class UserDTO {
-    Long id;
-    String name;
+    private Long id;
+    private String name;
     // Pair of Book name and Borrowing date
-    Set<Pair<String, SimpleDateFormat>> borrowings;
+    private Set<Pair<String, SimpleDateFormat>> borrowings;
 
     public Long getId() {
         return id;

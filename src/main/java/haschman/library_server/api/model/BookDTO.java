@@ -7,14 +7,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BookDTO {
-    String name;
-    String language;
-    Long ISBN;
-    Date publication_date;
-    String category;
-    String genre;
-    Pair<Integer, Integer> location;
-    Set<AuthorDTO> authors = new HashSet<>();
+    private String name;
+    private String language;
+    private Long ISBN;
+    private Integer publication_year;
+    private String category;
+    private String genre;
+    private Pair<Integer, Integer> location;
+    private final Set<AuthorDTO> authors = new HashSet<>();
 
     public String getName() {
         return name;
@@ -40,13 +40,12 @@ public class BookDTO {
         this.ISBN = ISBN;
     }
 
-    public Date getPublication_date() {
-        return publication_date;
+    public Integer getPublication_year() {
+        return publication_year;
     }
 
-    public void setPublication_date(Date publication_dateS) {
-        // format yyyy-MM-dd
-        this.publication_date = publication_dateS;
+    public void setPublication_year(Integer publication_dateS) {
+        this.publication_year = publication_dateS;
     }
 
     public String getCategory() {
