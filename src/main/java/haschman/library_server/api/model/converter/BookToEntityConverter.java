@@ -2,7 +2,6 @@ package haschman.library_server.api.model.converter;
 
 import haschman.library_server.api.model.AuthorDTO;
 import haschman.library_server.api.model.BookDTO;
-import haschman.library_server.business.AbstractCrudService;
 import haschman.library_server.business.AuthorService;
 import haschman.library_server.business.EntityStateException;
 import haschman.library_server.business.LocationService;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 
 @Component
@@ -36,7 +33,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
         book.setName(bookDTO.getName());
         book.setLanguage(bookDTO.getLanguage());
         book.setISBN(bookDTO.getISBN());
-        book.setPublication_date(bookDTO.getPublication_date());
+        book.setPublication_year(bookDTO.getPublication_year());
         book.setCategory(bookDTO.getCategory());
         book.setGenre(bookDTO.getGenre());
 

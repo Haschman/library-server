@@ -1,6 +1,5 @@
 package haschman.library_server.api.model.converter;
 
-import haschman.library_server.api.AuthorController;
 import haschman.library_server.api.model.AuthorDTO;
 import haschman.library_server.api.model.BookDTO;
 import haschman.library_server.domain.Author;
@@ -27,7 +26,7 @@ public class BookToDTOConverter implements Function<Book, BookDTO> {
         bookDTO.setName(book.getName());
         bookDTO.setLanguage(book.getLanguage());
         bookDTO.setISBN(book.getISBN());
-        bookDTO.setPublication_date(book.getPublication_date());
+        bookDTO.setPublication_year(book.getPublication_year());
         bookDTO.setCategory(book.getCategory());
         bookDTO.setGenre(book.getGenre());
         bookDTO.setLocation(book.getLocation().getStand(), book.getLocation().getShelf());
