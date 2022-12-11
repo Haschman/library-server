@@ -19,7 +19,7 @@ public class AuthorService extends AbstractCrudService<Author, Long> {
         Collection<Author> authors = repository.findAll();
         for (var member : authors)
             if (member.equals(intruder))
-                return Optional.of(intruder);
+                return Optional.of(member);
         return Optional.empty();
     }
 }

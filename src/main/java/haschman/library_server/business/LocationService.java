@@ -18,7 +18,7 @@ public class LocationService extends AbstractCrudService<Location, Long> {
         Collection<Location> locations = repository.findAll();
         for (var member : locations)
             if (intruder.equals(member))
-                return Optional.of(intruder);
+                return Optional.of(member);
         return Optional.empty();
     }
 }

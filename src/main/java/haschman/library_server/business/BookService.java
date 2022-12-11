@@ -16,7 +16,7 @@ public class BookService extends AbstractCrudService<Book, Long> {
 
     public Optional<Book> findBookByName(String name) {
         Collection<Book> books = repository.findAll();
-        for (var book:books) {
+        for (var book : books) {
             if (Objects.equals(book.getName(), name))
                 return Optional.of(book);
         }
