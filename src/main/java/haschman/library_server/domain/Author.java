@@ -85,6 +85,6 @@ public class Author implements DomainEntity<Long> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(century, name, surname, nationality);
     }
 }
