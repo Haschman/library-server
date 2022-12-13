@@ -30,6 +30,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
     public Book apply(BookDTO bookDTO) throws EntityStateException {
         Book book = new Book();
 
+        book.setId(bookDTO.getId());
         book.setName(bookDTO.getName());
         book.setLanguage(bookDTO.getLanguage());
         book.setISBN(bookDTO.getISBN());
@@ -37,7 +38,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
         book.setCategory(bookDTO.getCategory());
         book.setGenre(bookDTO.getGenre());
 
-        Optional<Location> location = locationService.findLocation(bookDTO.getLocation().getFirst(), bookDTO.getLocation().getSecond());
+        Optional<Location> location = locationService.findLocation(bookDTO.getStand(), bookDTO.getShelf());
         if (location.isPresent())
             book.setLocation(location.get());
         else

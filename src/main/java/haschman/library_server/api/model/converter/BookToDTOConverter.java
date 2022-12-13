@@ -23,13 +23,15 @@ public class BookToDTOConverter implements Function<Book, BookDTO> {
     public BookDTO apply(Book book) {
         BookDTO bookDTO = new BookDTO();
 
+        bookDTO.setId(book.getId());
         bookDTO.setName(book.getName());
         bookDTO.setLanguage(book.getLanguage());
         bookDTO.setISBN(book.getISBN());
         bookDTO.setPublication_year(book.getPublication_year());
         bookDTO.setCategory(book.getCategory());
         bookDTO.setGenre(book.getGenre());
-        bookDTO.setLocation(book.getLocation().getStand(), book.getLocation().getShelf());
+        bookDTO.setShelf(book.getLocation().getShelf());
+        bookDTO.setStand(book.getLocation().getStand());
 
         Collection<Author> allAuthorsEntity = book.getAuthor();
         for (var authorEntity : allAuthorsEntity)

@@ -44,7 +44,8 @@ public class Book implements DomainEntity<Long>{
      * @param authors required
      * @param location required
      */
-    public Book(String name, String language, Long ISBN, Integer publication_year, String category, String genre, Set<Author> authors, Location location) {
+    public Book(Long id, String name, String language, Long ISBN, Integer publication_year, String category, String genre, Set<Author> authors, Location location) {
+        this.id = id;
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
         this.ISBN = ISBN;
@@ -52,7 +53,7 @@ public class Book implements DomainEntity<Long>{
         this.category = category;
         this.genre = genre;
         this.authors = Objects.requireNonNull(authors);
-        //this.borrowings = borrowings;        this.location = Objects.requireNonNull(location);
+        this.location = location;
     }
 
     @Override

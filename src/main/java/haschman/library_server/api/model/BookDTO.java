@@ -2,19 +2,28 @@ package haschman.library_server.api.model;
 
 import org.springframework.data.util.Pair;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BookDTO {
+    Long Id;
     private String name;
     private String language;
     private Long ISBN;
     private Integer publication_year;
     private String category;
     private String genre;
-    private Pair<Integer, Integer> location;
+    private Integer shelf;
+    private Integer stand;
     private final Set<AuthorDTO> authors = new HashSet<>();
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
 
     public String getName() {
         return name;
@@ -64,12 +73,20 @@ public class BookDTO {
         this.genre = genre;
     }
 
-    public Pair<Integer, Integer> getLocation() {
-        return location;
+    public Integer getShelf() {
+        return shelf;
     }
 
-    public void setLocation(int stand, int shelf) {
-        this.location = Pair.of(stand, shelf);
+    public void setShelf(Integer shelf) {
+        this.shelf = shelf;
+    }
+
+    public Integer getStand() {
+        return stand;
+    }
+
+    public void setStand(Integer stand) {
+        this.stand = stand;
     }
 
     public Set<AuthorDTO> getAuthors() {
