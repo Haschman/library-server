@@ -2,6 +2,7 @@ package haschman.library_server.api;
 
 import haschman.library_server.business.AbstractCrudService;
 import haschman.library_server.domain.DomainEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -26,6 +27,14 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
     @GetMapping
     public Collection<D> readAll() {
         return service.readAll().stream().map(toDTOConverter).toList();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<D> readOne(@PathVariable ID id) {
+        var response = service.readById(id);
+        if (response.isPresent())
+            return ResponseEntity.ok(toDTOConverter.apply(response.get()));
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
