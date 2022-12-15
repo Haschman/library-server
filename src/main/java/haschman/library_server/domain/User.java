@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "userrr")
+@Table(name = "users")
 public class User implements DomainEntity<Long> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;

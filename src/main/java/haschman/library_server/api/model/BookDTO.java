@@ -1,7 +1,5 @@
 package haschman.library_server.api.model;
 
-import org.springframework.data.util.Pair;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +8,7 @@ public class BookDTO {
     private String name;
     private String language;
     private Long ISBN;
-    private Integer publication_year;
+    private Integer publicationYear;
     private String category;
     private String genre;
     private Integer shelf;
@@ -49,12 +47,12 @@ public class BookDTO {
         this.ISBN = ISBN;
     }
 
-    public Integer getPublication_year() {
-        return publication_year;
+    public Integer getPublicationYear() {
+        return publicationYear;
     }
 
-    public void setPublication_year(Integer publication_dateS) {
-        this.publication_year = publication_dateS;
+    public void setPublicationYear(Integer publication_dateS) {
+        this.publicationYear = publication_dateS;
     }
 
     public String getCategory() {

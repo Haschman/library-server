@@ -6,7 +6,7 @@ import java.util.*;
 @Entity
 public class Location implements DomainEntity<Long> {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private int stand;

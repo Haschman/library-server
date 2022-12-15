@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Book implements DomainEntity<Long>{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;
@@ -16,18 +16,19 @@ public class Book implements DomainEntity<Long>{
     private String language;
     @Column
     private Long ISBN;
-    @Column
-    private Integer publication_year;
+    @Column(name = "publication_year")
+    private Integer publicationYear;
     @Column
     private String category;
     @Column
     private String genre;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     public Book() {
@@ -38,18 +39,18 @@ public class Book implements DomainEntity<Long>{
      * @param name required
      * @param language required
      * @param ISBN nullable
-     * @param publication_year nullable
+     * @param publicationYear nullable
      * @param category nullable
      * @param genre nullable
      * @param authors required
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, Integer publication_year, String category, String genre, Set<Author> authors, Location location) {
+    public Book(Long id, String name, String language, Long ISBN, Integer publicationYear, String category, String genre, Set<Author> authors, Location location) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
         this.ISBN = ISBN;
-        this.publication_year = publication_year;
+        this.publicationYear = publicationYear;
         this.category = category;
         this.genre = genre;
         this.authors = Objects.requireNonNull(authors);
@@ -89,12 +90,12 @@ public class Book implements DomainEntity<Long>{
         this.ISBN = ISBN;
     }
 
-    public Integer getPublication_year() {
-        return publication_year;
+    public Integer getPublicationYear() {
+        return publicationYear;
     }
 
-    public void setPublication_year(Integer publication_date) {
-        this.publication_year = publication_date;
+    public void setPublicationYear(Integer publication_date) {
+        this.publicationYear = publication_date;
     }
 
     public String getCategory() {
@@ -135,11 +136,11 @@ public class Book implements DomainEntity<Long>{
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
 
-        return name.equals(book.name) && Objects.equals(language, book.language) && Objects.equals(ISBN, book.ISBN) && Objects.equals(publication_year, book.publication_year) && authors.equals(book.authors);
+        return name.equals(book.name) && Objects.equals(language, book.language) && Objects.equals(ISBN, book.ISBN) && Objects.equals(publicationYear, book.publicationYear) && authors.equals(book.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, language, ISBN, publication_year);
+        return Objects.hash(name, language, ISBN, publicationYear);
     }
 }

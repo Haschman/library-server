@@ -27,7 +27,7 @@ public class BookToDTOConverter implements Function<Book, BookDTO> {
         bookDTO.setName(book.getName());
         bookDTO.setLanguage(book.getLanguage());
         bookDTO.setISBN(book.getISBN());
-        bookDTO.setPublication_year(book.getPublication_year());
+        bookDTO.setPublicationYear(book.getPublicationYear());
         bookDTO.setCategory(book.getCategory());
         bookDTO.setGenre(book.getGenre());
         bookDTO.setShelf(book.getLocation().getShelf());

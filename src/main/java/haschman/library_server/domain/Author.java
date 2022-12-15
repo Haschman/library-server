@@ -6,7 +6,7 @@ import java.util.*;
 @Entity
 public class Author implements DomainEntity<Long> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;

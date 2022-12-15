@@ -7,12 +7,12 @@ import java.util.Objects;
 @Entity
 public class Borrowing implements DomainEntity<Long> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private SimpleDateFormat date;
-    @Column
-    private SimpleDateFormat return_date;
+    @Column(name = "return_date")
+    private SimpleDateFormat returnDate;
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
@@ -23,10 +23,10 @@ public class Borrowing implements DomainEntity<Long> {
     public Borrowing() {
     }
 
-    public Borrowing(Long id, SimpleDateFormat date, SimpleDateFormat return_date, Book book, User user) {
+    public Borrowing(Long id, SimpleDateFormat date, SimpleDateFormat returnDate, Book book, User user) {
         this.id = id;
         this.date = Objects.requireNonNull(date);
-        this.return_date = return_date;
+        this.returnDate = returnDate;
         this.book = Objects.requireNonNull(book);
         this.user = Objects.requireNonNull(user);
     }
@@ -48,12 +48,12 @@ public class Borrowing implements DomainEntity<Long> {
         this.date = date;
     }
 
-    public SimpleDateFormat getReturn_date() {
-        return return_date;
+    public SimpleDateFormat getReturnDate() {
+        return returnDate;
     }
 
-    public void setReturn_date(SimpleDateFormat return_date) {
-        this.return_date = return_date;
+    public void setReturnDate(SimpleDateFormat return_date) {
+        this.returnDate = return_date;
     }
 
     public Book getBook() {

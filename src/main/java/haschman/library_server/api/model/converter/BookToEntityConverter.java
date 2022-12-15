@@ -34,7 +34,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
         book.setName(bookDTO.getName());
         book.setLanguage(bookDTO.getLanguage());
         book.setISBN(bookDTO.getISBN());
-        book.setPublication_year(bookDTO.getPublication_year());
+        book.setPublicationYear(bookDTO.getPublicationYear());
         book.setCategory(bookDTO.getCategory());
         book.setGenre(bookDTO.getGenre());
 
