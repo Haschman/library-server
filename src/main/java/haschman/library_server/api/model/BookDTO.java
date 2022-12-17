@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BookDTO {
-    Long Id;
+    private Long Id;
     private String name;
     private String language;
     private Long ISBN;
@@ -13,7 +13,7 @@ public class BookDTO {
     private String genre;
     private Integer shelf;
     private Integer stand;
-    private final Set<AuthorDTO> authors = new HashSet<>();
+    private final Set<Long> authors = new HashSet<>();
 
     public Long getId() {
         return Id;
@@ -87,11 +87,11 @@ public class BookDTO {
         this.stand = stand;
     }
 
-    public Set<AuthorDTO> getAuthors() {
+    public Set<Long> getAuthors() {
         return authors;
     }
 
-    public void addAuthor(AuthorDTO author) {
-        authors.add(author);
+    public void addAuthor(Long authorID) {
+        authors.add(authorID);
     }
 }

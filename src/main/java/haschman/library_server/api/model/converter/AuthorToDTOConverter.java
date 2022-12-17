@@ -14,6 +14,7 @@ public class AuthorToDTOConverter implements Function<Author, AuthorDTO> {
     public AuthorDTO apply(Author author) {
         AuthorDTO authorDTO = new AuthorDTO();
 
+        authorDTO.setId(author.getId());
         authorDTO.setName(author.getName());
         authorDTO.setSurname(author.getSurname());
         authorDTO.setNationality(author.getNationality());

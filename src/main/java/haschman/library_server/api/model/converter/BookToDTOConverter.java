@@ -35,7 +35,7 @@ public class BookToDTOConverter implements Function<Book, BookDTO> {
 
         Collection<Author> allAuthorsEntity = book.getAuthor();
         for (var authorEntity : allAuthorsEntity)
-            bookDTO.addAuthor(authorToDto.apply(authorEntity));
+            bookDTO.addAuthor(authorToDto.apply(authorEntity).getId());
 
         return bookDTO;
     }

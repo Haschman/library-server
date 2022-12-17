@@ -44,13 +44,13 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
         else
             throw new EntityStateException("Location does not exist");
 
-        Collection<AuthorDTO> allAuthorsDTO = bookDTO.getAuthors();
-        for (var authorDTO : allAuthorsDTO) {
-            Optional<Author> author = authorService.findAuthor(authorDTO);
+        Collection<Long> allAuthors = bookDTO.getAuthors();
+        for (var authorID : allAuthors) {
+            Optional<Author> author = authorService.readById(authorID);
             if (author.isPresent())
                 book.addAuthor(author.get());
             else
-                throw new EntityStateException("Author does not exist: " + authorDTO.getSurname());
+                throw new EntityStateException("Author with this ID does not exist: " + authorID);
         }
 
         return book;
