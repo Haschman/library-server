@@ -2,6 +2,7 @@ package haschman.library_server.domain;
 
 import jakarta.persistence.*;
 
+import java.time.Year;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class Book implements DomainEntity<Long>{
     @Column
     private Long ISBN;
     @Column(name = "publication_year")
-    private Integer publicationYear;
+    private Year publicationYear;
     @Column
     private String category;
     @Column
@@ -46,7 +47,7 @@ public class Book implements DomainEntity<Long>{
      * @param authors required
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, Integer publicationYear, String category, String genre, Set<Author> authors, Location location) {
+    public Book(Long id, String name, String language, Long ISBN, Year publicationYear, String category, String genre, Set<Author> authors, Location location) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
@@ -91,11 +92,11 @@ public class Book implements DomainEntity<Long>{
         this.ISBN = ISBN;
     }
 
-    public Integer getPublicationYear() {
+    public Year getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(Integer publication_date) {
+    public void setPublicationYear(Year publication_date) {
         this.publicationYear = publication_date;
     }
 

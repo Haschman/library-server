@@ -1,17 +1,27 @@
 package haschman.library_server.api.model;
 
+import jakarta.validation.constraints.*;
+
+import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BookDTO {
     private Long Id;
+    @NotNull
     private String name;
+    @NotNull
     private String language;
     private Long ISBN;
-    private Integer publicationYear;
+    @PastOrPresent
+    private Year publicationYear;
     private String category;
     private String genre;
+    @Min(1)
+    @Max(100)
     private Integer shelf;
+    @Min(1)
+    @Max(100)
     private Integer stand;
     private final Set<Long> authors = new HashSet<>();
 
@@ -47,11 +57,11 @@ public class BookDTO {
         this.ISBN = ISBN;
     }
 
-    public Integer getPublicationYear() {
+    public @PastOrPresent Year getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(Integer publication_dateS) {
+    public void setPublicationYear(Year publication_dateS) {
         this.publicationYear = publication_dateS;
     }
 
