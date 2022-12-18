@@ -1,6 +1,6 @@
 package haschman.library_server.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
