@@ -1,6 +1,7 @@
 package haschman.library_server.api;
 
 import haschman.library_server.business.AbstractCrudService;
+import haschman.library_server.business.EntityNotFoundException;
 import haschman.library_server.business.EntityStateException;
 import haschman.library_server.domain.DomainEntity;
 import jakarta.validation.Valid;
@@ -31,6 +32,8 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
         try {
             D DTO = toDTOConverter.apply(service.create(toEntityConverter.apply(entityAsDTO))); // This could throw
             return ResponseEntity.status(HttpStatus.CREATED).body(DTO);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (EntityStateException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }

@@ -19,9 +19,11 @@ public class BookDTO {
     private String genre;
     @Min(1)
     @Max(100)
+    @NotNull
     private Integer shelf;
     @Min(1)
     @Max(100)
+    @NotNull
     private Integer stand;
     private final Set<Long> authors = new HashSet<>();
 

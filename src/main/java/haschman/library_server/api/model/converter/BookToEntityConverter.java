@@ -1,9 +1,8 @@
 package haschman.library_server.api.model.converter;
 
-import haschman.library_server.api.model.AuthorDTO;
 import haschman.library_server.api.model.BookDTO;
 import haschman.library_server.business.AuthorService;
-import haschman.library_server.business.EntityStateException;
+import haschman.library_server.business.EntityNotFoundException;
 import haschman.library_server.business.LocationService;
 import haschman.library_server.domain.Author;
 import haschman.library_server.domain.Book;
@@ -27,7 +26,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
     }
 
     @Override
-    public Book apply(BookDTO bookDTO) throws EntityStateException {
+    public Book apply(BookDTO bookDTO) throws EntityNotFoundException {
         Book book = new Book();
 
         book.setId(bookDTO.getId());
@@ -42,7 +41,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
         if (location.isPresent())
             book.setLocation(location.get());
         else
-            throw new EntityStateException("Location does not exist");
+            throw new EntityNotFoundException("Location: " + bookDTO.getStand() + " " + bookDTO.getShelf());
 
         Collection<Long> allAuthors = bookDTO.getAuthors();
         for (var authorID : allAuthors) {
@@ -50,7 +49,7 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
             if (author.isPresent())
                 book.addAuthor(author.get());
             else
-                throw new EntityStateException("Author with this ID does not exist: " + authorID);
+                throw new EntityNotFoundException("Author with ID: " + authorID);
         }
 
         return book;
