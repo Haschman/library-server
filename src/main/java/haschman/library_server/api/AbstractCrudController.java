@@ -1,8 +1,14 @@
 package haschman.library_server.api;
 
 import haschman.library_server.business.AbstractCrudService;
+import haschman.library_server.business.EntityStateException;
 import haschman.library_server.domain.DomainEntity;
+import jakarta.validation.Valid;
+import jakarta.validation.Validation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -20,8 +26,11 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
     }
 
     @PostMapping
-    public D create(@RequestBody D entityAsDTO) {
-        return toDTOConverter.apply(service.create(toEntityConverter.apply(entityAsDTO)));
+    public ResponseEntity<D> create(@Valid @RequestBody D entityAsDTO, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return new ResponseEntity<>(entityAsDTO, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.CREATED).body(toDTOConverter.apply(service.create(toEntityConverter.apply(entityAsDTO))));
     }
 
     @GetMapping
