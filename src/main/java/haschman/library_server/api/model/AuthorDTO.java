@@ -1,10 +1,12 @@
 package haschman.library_server.api.model;
 
-import java.util.Set;
+
+import jakarta.validation.constraints.NotNull;
 
 public class AuthorDTO {
     private Long id;
     private String name;
+    @NotNull
     private String surname;
     private String nationality;
     private int century;
