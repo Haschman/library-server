@@ -17,7 +17,7 @@ public class Book implements DomainEntity<Long>{
     @Column(nullable = false)
     private String language;
     @Column
-    private Long ISBN;
+    private String ISBN;
     @Column(name = "publication_year")
     private Year publicationYear;
     @Column
@@ -47,7 +47,7 @@ public class Book implements DomainEntity<Long>{
      * @param authors required
      * @param location required
      */
-    public Book(Long id, String name, String language, Long ISBN, Year publicationYear, String category, String genre, Set<Author> authors, Location location) {
+    public Book(Long id, String name, String language, String ISBN, Year publicationYear, String category, String genre, Set<Author> authors, Location location) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.language = Objects.requireNonNull(language);
@@ -84,11 +84,11 @@ public class Book implements DomainEntity<Long>{
         this.language = language;
     }
 
-    public Long getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(Long ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 

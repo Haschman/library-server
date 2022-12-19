@@ -12,7 +12,8 @@ public class BookDTO {
     private String name;
     @NotNull
     private String language;
-    private Long ISBN;
+    @Size(min = 10, max = 20)
+    private String ISBN;
     @PastOrPresent
     private Year publicationYear;
     private String category;
@@ -51,11 +52,11 @@ public class BookDTO {
         this.language = language;
     }
 
-    public Long getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(Long ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
