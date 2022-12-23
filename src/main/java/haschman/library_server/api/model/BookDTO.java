@@ -12,7 +12,9 @@ public class BookDTO {
     private String name;
     @NotNull
     private String language;
-    @Size(min = 10, max = 20)
+
+    // ISBN should be 0 or something between 10 and 20 - custom constraint maybe?
+    @Size(max = 20)
     private String ISBN;
     @PastOrPresent
     private Year publicationYear;

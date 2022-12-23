@@ -27,14 +27,18 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
 
     @PostMapping
     public ResponseEntity<D> create(@Valid @RequestBody D entityAsDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            System.out.println("ERROR JSON: " + bindingResult.getFieldError().getDefaultMessage());
             return new ResponseEntity<>(entityAsDTO, HttpStatus.BAD_REQUEST);
+        }
         try {
             D DTO = toDTOConverter.apply(service.create(toEntityConverter.apply(entityAsDTO))); // This could throw
             return ResponseEntity.status(HttpStatus.CREATED).body(DTO);
         } catch (EntityNotFoundException e) {
+            System.out.println("ERROR Something is missing: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (EntityStateException e) {
+            System.out.println("ERROR " + e.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
