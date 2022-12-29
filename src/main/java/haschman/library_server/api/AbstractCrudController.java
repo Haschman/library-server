@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -57,8 +58,19 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody D entityAsDTO, @PathVariable("id") ID id) {
-        service.update(toEntityConverter.apply(entityAsDTO));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@Valid @RequestBody D entityAsDTO, BindingResult bindingResult, @PathVariable ID id) {
+        if (bindingResult.hasErrors()) {
+            var field = bindingResult.getFieldError().getField();
+            var message = bindingResult.getFieldError().getDefaultMessage();
+            System.out.println("ERROR JSON: " + field + message);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ERROR: " + field + message);
+        }
+        try {
+            service.update(toEntityConverter.apply(entityAsDTO));
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR missing: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
