@@ -62,7 +62,13 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") ID id) {
-        service.deleteById(id);
+    public ResponseEntity<Void> delete(@PathVariable("id") ID id) {
+        try {
+            service.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (EntityNotFoundException e) {
+            System.out.println("ERROR Something is missing: " + e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
     }
 }

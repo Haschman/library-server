@@ -34,15 +34,22 @@ public abstract class AbstractCrudService<E extends DomainEntity<ID>, ID> {
         return repository.findAll();
     }
 
-    public E update(E entity) throws EntityStateException {
+    /**
+     * @throws EntityNotFoundException if ID is not found
+     */
+    public E update(E entity) {
         if (repository.existsById(entity.getId()))
             return repository.save(entity);
-        else
-            throw new EntityStateException(entity, " cannot be found!");
+        throw new EntityNotFoundException(entity.toString());
     }
 
+    /**
+     * @throws EntityNotFoundException if ID is not found
+     */
     public void deleteById(ID id) {
-        repository.deleteById(id);
+        if (repository.existsById(id))
+            repository.deleteById(id);
+        else
+            throw new EntityNotFoundException("Entity with ID: " + id);
     }
-
 }
