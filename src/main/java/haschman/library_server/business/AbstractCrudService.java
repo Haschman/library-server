@@ -41,7 +41,7 @@ public abstract class AbstractCrudService<E extends DomainEntity<ID>, ID> {
         if (repository.existsById(entity.getId())) { // Find Entity to update
             Collection<E> all = repository.findAll();
             for (var one : all)
-                if (one.equals(entity))
+                if (one.equals(entity) && one.getId() != entity.getId())
                     throw new EntityStateException(entity.getClass().getSimpleName(), " already exists!");
             return repository.save(entity);
         }
