@@ -10,8 +10,14 @@ import java.util.Optional;
 
 @Component
 public class BookService extends AbstractCrudService<Book, Long> {
+    private final BookRepository bookRepository;
     public BookService(BookRepository repository) {
         super(repository);
+        bookRepository = repository;
+    }
+
+    public Collection<Book> findBooksByAuthor(Long authorId) {
+        return bookRepository.findBooksByAuthor(authorId);
     }
 
     public Optional<Book> findBookByName(String name) {
