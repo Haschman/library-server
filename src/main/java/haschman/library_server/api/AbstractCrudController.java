@@ -27,20 +27,23 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
     }
 
     @PostMapping
+    @ResponseBody
     public ResponseEntity<D> create(@Valid @RequestBody D entityAsDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println("ERROR JSON: " + bindingResult.getFieldError().getDefaultMessage());
-            return new ResponseEntity<>(entityAsDTO, HttpStatus.BAD_REQUEST);
+            var field = bindingResult.getFieldError().getField();
+            var message = bindingResult.getFieldError().getDefaultMessage();
+            System.out.println("ERROR JSON: " + field + message);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ERROR: " + field + message);
         }
         try {
             D DTO = toDTOConverter.apply(service.create(toEntityConverter.apply(entityAsDTO))); // This could throw
             return ResponseEntity.status(HttpStatus.CREATED).body(DTO);
         } catch (EntityNotFoundException e) {
-            System.out.println("ERROR Something is missing: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            System.out.println("ERROR missing: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR missing: " + e.getMessage());
         } catch (EntityStateException e) {
             System.out.println("ERROR " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "ERROR: " + e.getMessage());
         }
     }
 
@@ -69,7 +72,11 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
         try {
             service.update(toEntityConverter.apply(entityAsDTO));
         } catch (EntityNotFoundException e) {
+            System.out.println("ERROR missing: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR missing: " + e.getMessage());
+        } catch (EntityStateException e) {
+            System.out.println("ERROR: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "ERROR: " + e.getMessage());
         }
     }
 

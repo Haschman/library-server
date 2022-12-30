@@ -22,7 +22,7 @@ public abstract class AbstractCrudService<E extends DomainEntity<ID>, ID> {
         Collection<E> all = repository.findAll();
         for (var one : all)
             if (one.equals(entity))
-                throw new EntityStateException(entity, " already exists!");
+                throw new EntityStateException(entity.getClass().getSimpleName(), " already exists!");
         return repository.save(entity);
     }
 
@@ -38,8 +38,13 @@ public abstract class AbstractCrudService<E extends DomainEntity<ID>, ID> {
      * @throws EntityNotFoundException if ID is not found
      */
     public E update(E entity) {
-        if (repository.existsById(entity.getId()))
+        if (repository.existsById(entity.getId())) { // Find Entity to update
+            Collection<E> all = repository.findAll();
+            for (var one : all)
+                if (one.equals(entity))
+                    throw new EntityStateException(entity.getClass().getSimpleName(), " already exists!");
             return repository.save(entity);
+        }
         throw new EntityNotFoundException(entity.toString());
     }
 
