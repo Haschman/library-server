@@ -20,14 +20,8 @@ public class BookDTO {
     private Year publicationYear;
     private String category;
     private String genre;
-    @Min(1)
-    @Max(100)
     @NotNull
-    private Integer shelf;
-    @Min(1)
-    @Max(100)
-    @NotNull
-    private Integer stand;
+    private Long location;
     private final Set<Long> authors = new HashSet<>();
 
     public Long getId() {
@@ -86,20 +80,12 @@ public class BookDTO {
         this.genre = genre;
     }
 
-    public Integer getShelf() {
-        return shelf;
+    public Long getLocation() {
+        return location;
     }
 
-    public void setShelf(Integer shelf) {
-        this.shelf = shelf;
-    }
-
-    public Integer getStand() {
-        return stand;
-    }
-
-    public void setStand(Integer stand) {
-        this.stand = stand;
+    public void setLocation(Long location) {
+        this.location = location;
     }
 
     public Set<Long> getAuthors() {

@@ -37,16 +37,16 @@ public class BookToEntityConverter implements Function<BookDTO, Book> {
         book.setCategory(bookDTO.getCategory());
         book.setGenre(bookDTO.getGenre());
 
-        Optional<Location> location = locationService.findLocation(bookDTO.getStand(), bookDTO.getShelf());
-        if (location.isPresent())
+        Optional<Location> location = locationService.readById(bookDTO.getLocation());
+        if (location.isPresent()) // Found in database
             book.setLocation(location.get());
         else
-            throw new EntityNotFoundException("Location: " + bookDTO.getStand() + " " + bookDTO.getShelf());
+            throw new EntityNotFoundException("Location with ID: " + bookDTO.getLocation());
 
         Collection<Long> allAuthors = bookDTO.getAuthors();
         for (var authorID : allAuthors) {
             Optional<Author> author = authorService.readById(authorID);
-            if (author.isPresent())
+            if (author.isPresent()) // Found in database
                 book.addAuthor(author.get());
             else
                 throw new EntityNotFoundException("Author with ID: " + authorID);

@@ -10,6 +10,12 @@ import java.util.function.Function;
 public class LocationToEntityConverter implements Function<LocationDTO, Location> {
     @Override
     public Location apply(LocationDTO locationDTO) {
-        return new Location(locationDTO.getStand(), locationDTO.getShelf());
+        Location location = new Location();
+
+        location.setId(locationDTO.getId());
+        location.setStand(locationDTO.getStand());
+        location.setShelf(locationDTO.getShelf());
+
+        return location;
     }
 }

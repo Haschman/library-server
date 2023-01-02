@@ -12,13 +12,4 @@ public class LocationService extends AbstractCrudService<Location, Long> {
     public LocationService(LocationRepository repository) {
         super(repository);
     }
-
-    public Optional<Location> findLocation(int stand, int shelf) {
-        Location intruder = new Location(stand, shelf);
-        Collection<Location> locations = repository.findAll();
-        for (var member : locations)
-            if (intruder.equals(member))
-                return Optional.of(member);
-        return Optional.empty();
-    }
 }

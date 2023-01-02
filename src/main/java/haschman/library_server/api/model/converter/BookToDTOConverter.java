@@ -12,13 +12,6 @@ import java.util.function.Function;
 
 @Component
 public class BookToDTOConverter implements Function<Book, BookDTO> {
-    private final Function<Author, AuthorDTO> authorToDto;
-
-    @Autowired
-    public BookToDTOConverter(Function<Author, AuthorDTO> authorToDto) {
-        this.authorToDto = authorToDto;
-    }
-
     @Override
     public BookDTO apply(Book book) {
         BookDTO bookDTO = new BookDTO();
@@ -30,12 +23,11 @@ public class BookToDTOConverter implements Function<Book, BookDTO> {
         bookDTO.setPublicationYear(book.getPublicationYear());
         bookDTO.setCategory(book.getCategory());
         bookDTO.setGenre(book.getGenre());
-        bookDTO.setShelf(book.getLocation().getShelf());
-        bookDTO.setStand(book.getLocation().getStand());
+        bookDTO.setLocation(book.getLocation().getId());
 
-        Collection<Author> allAuthorsEntity = book.getAuthor();
-        for (var authorEntity : allAuthorsEntity)
-            bookDTO.addAuthor(authorToDto.apply(authorEntity).getId());
+        Collection<Author> allAuthors = book.getAuthor();
+        for (var author : allAuthors)
+            bookDTO.addAuthor(author.getId());
 
         return bookDTO;
     }

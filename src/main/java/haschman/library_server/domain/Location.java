@@ -18,15 +18,17 @@ public class Location implements DomainEntity<Long> {
     public Location() {
     }
 
-    public Location(int stand, int shelf, Set<Book> books) {
+    public Location(Long id, int stand, int shelf) {
+        this.id = id;
+        this.stand = stand;
+        this.shelf = shelf;
+    }
+
+    public Location(Long id, int stand, int shelf, Set<Book> books) {
+        this.id = id;
         this.stand = stand;
         this.shelf = shelf;
         this.books = books;
-    }
-
-    public Location(int stand, int shelf) {
-        this.stand = stand;
-        this.shelf = shelf;
     }
 
     @Override
