@@ -16,11 +16,11 @@ public class Author implements DomainEntity<Long> {
     @Column
     private String nationality;
     @Column
-    private int century;
+    private Integer century;
     public Author() {
     }
 
-    public Author(Long id, String name, String surname, String nationality, int century) {
+    public Author(Long id, String name, String surname, String nationality, Integer century) {
         this.id = id;
         this.name = Objects.requireNonNull(name);
         this.surname = Objects.requireNonNull(surname);
@@ -28,7 +28,7 @@ public class Author implements DomainEntity<Long> {
         this.century = century;
     }
 
-    public Author(String name, String surname, String nationality, int century) {
+    public Author(String name, String surname, String nationality, Integer century) {
         this.name = name;
         this.surname = surname;
         this.nationality = nationality;
@@ -68,11 +68,11 @@ public class Author implements DomainEntity<Long> {
         this.nationality = nationality;
     }
 
-    public int getCentury() {
+    public Integer getCentury() {
         return century;
     }
 
-    public void setCentury(int century) {
+    public void setCentury(Integer century) {
         this.century = century;
     }
 
