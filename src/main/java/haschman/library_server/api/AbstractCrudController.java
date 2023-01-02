@@ -5,6 +5,7 @@ import haschman.library_server.business.EntityNotFoundException;
 import haschman.library_server.business.EntityStateException;
 import haschman.library_server.domain.DomainEntity;
 import jakarta.validation.Valid;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -87,7 +88,10 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
             return ResponseEntity.ok().build();
         } catch (EntityNotFoundException e) {
             System.out.println("ERROR Something is missing: " + e.getMessage());
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR Something is missing: " + e.getMessage());
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("ERROR: You are trying to delete something that other items use. Delete them first or just remove the use of this one.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ERROR: You are trying to delete something that other items use. Delete them first or just remove the use of this one.");
         }
     }
 }
