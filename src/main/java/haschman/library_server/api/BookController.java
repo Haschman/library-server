@@ -27,4 +27,9 @@ public class BookController extends AbstractCrudController<Book, BookDTO, Long> 
     public Collection<BookDTO> findAllByAuthor(@RequestParam Long authorID) {
         return ((BookService)service).findBooksByAuthor(authorID).stream().map(toDTOConverter).toList();
     }
+
+    @GetMapping("/location")
+    public Collection<BookDTO> findAllFromLocation(@RequestParam Long locationID) {
+        return ((BookService)service).findBooksByLocation(locationID).stream().map(toDTOConverter).toList();
+    }
 }

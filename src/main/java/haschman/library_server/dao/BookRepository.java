@@ -12,4 +12,7 @@ import java.util.Collection;
 public interface BookRepository extends CrudRepository<Book, Long>, JpaRepository<Book, Long> {
     @Query("select b from Book b join b.authors a where a.id = :authorID")
     Collection<Book> findBooksByAuthor(@Param("authorID") Long authorID);
+
+    @Query("select b from Book b join b.location l where l.id = :locationID")
+    Collection<Book> findBooksByLocationId(@Param("locationID") Long locationID);
 }

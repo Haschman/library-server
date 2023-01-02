@@ -20,12 +20,7 @@ public class BookService extends AbstractCrudService<Book, Long> {
         return bookRepository.findBooksByAuthor(authorId);
     }
 
-    public Optional<Book> findBookByName(String name) {
-        Collection<Book> books = repository.findAll();
-        for (var book : books) {
-            if (Objects.equals(book.getName(), name))
-                return Optional.of(book);
-        }
-        return Optional.empty();
+    public Collection<Book> findBooksByLocation(Long locationId) {
+        return bookRepository.findBooksByLocationId(locationId);
     }
 }
