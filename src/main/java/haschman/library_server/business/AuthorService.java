@@ -6,7 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthorService extends AbstractCrudService<Author, Long> {
+    private final AuthorRepository authorRepository;
     public AuthorService(AuthorRepository authorRepository) {
         super(authorRepository);
+        this.authorRepository = authorRepository;
+    }
+    public Integer countAllAuthors() {
+        return authorRepository.countAllAuthors();
     }
 }
