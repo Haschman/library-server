@@ -34,4 +34,12 @@ public class BookService extends AbstractCrudService<Book, Long> {
             deleteById(book.getId());
         }
     }
+
+    @Transactional
+    public void deleteAllBooksFromLocation(Long authorID) {
+        Collection<Book> booksFromLocation = findBooksFromLocation(authorID);
+        for (Book book : booksFromLocation) {
+            deleteById(book.getId());
+        }
+    }
 }

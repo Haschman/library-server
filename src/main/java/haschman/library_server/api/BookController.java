@@ -39,4 +39,9 @@ public class BookController extends AbstractCrudController<Book, BookDTO, Long> 
     public void deleteAllBooksByAuthor(@RequestParam Long authorID) {
         ((BookService)service).deleteAllBooksByAuthor(authorID);
     }
+
+    @DeleteMapping("/location")
+    public void deleteAllBooksFromLocation(@RequestParam Long locationID) {
+        ((BookService)service).deleteAllBooksFromLocation(locationID);
+    }
 }
