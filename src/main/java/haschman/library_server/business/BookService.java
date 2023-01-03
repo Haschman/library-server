@@ -5,8 +5,6 @@ import haschman.library_server.domain.Book;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
 
 @Component
 public class BookService extends AbstractCrudService<Book, Long> {
@@ -20,7 +18,11 @@ public class BookService extends AbstractCrudService<Book, Long> {
         return bookRepository.findBooksByAuthor(authorId);
     }
 
-    public Collection<Book> findBooksByLocation(Long locationId) {
-        return bookRepository.findBooksByLocationId(locationId);
+    public Collection<Book> findBooksFromLocation(Long locationId) {
+        return bookRepository.findBooksFromLocation(locationId);
+    }
+
+    public Integer countAllBooks() {
+        return bookRepository.countAllBooks();
     }
 }

@@ -30,6 +30,11 @@ public class BookController extends AbstractCrudController<Book, BookDTO, Long> 
 
     @GetMapping("/location")
     public Collection<BookDTO> findAllFromLocation(@RequestParam Long locationID) {
-        return ((BookService)service).findBooksByLocation(locationID).stream().map(toDTOConverter).toList();
+        return ((BookService)service).findBooksFromLocation(locationID).stream().map(toDTOConverter).toList();
+    }
+
+    @GetMapping("/count")
+    public Integer countAllBooks() {
+        return ((BookService)service).countAllBooks();
     }
 }

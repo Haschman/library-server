@@ -14,5 +14,8 @@ public interface BookRepository extends CrudRepository<Book, Long>, JpaRepositor
     Collection<Book> findBooksByAuthor(@Param("authorID") Long authorID);
 
     @Query("select b from Book b join b.location l where l.id = :locationID")
-    Collection<Book> findBooksByLocationId(@Param("locationID") Long locationID);
+    Collection<Book> findBooksFromLocation(@Param("locationID") Long locationID);
+
+    @Query("select count(b) from Book b")
+    Integer countAllBooks();
 }
