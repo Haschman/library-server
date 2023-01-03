@@ -5,10 +5,7 @@ import haschman.library_server.api.model.converter.BookToDTOConverter;
 import haschman.library_server.api.model.converter.BookToEntityConverter;
 import haschman.library_server.business.BookService;
 import haschman.library_server.domain.Book;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -36,5 +33,10 @@ public class BookController extends AbstractCrudController<Book, BookDTO, Long> 
     @GetMapping("/count")
     public Integer countAllBooks() {
         return ((BookService)service).countAllBooks();
+    }
+
+    @DeleteMapping("/author")
+    public void deleteAllBooksByAuthor(@RequestParam Long authorID) {
+        ((BookService)service).deleteAllBooksByAuthor(authorID);
     }
 }

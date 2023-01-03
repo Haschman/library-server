@@ -2,6 +2,7 @@ package haschman.library_server.business;
 
 import haschman.library_server.dao.BookRepository;
 import haschman.library_server.domain.Book;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -24,5 +25,13 @@ public class BookService extends AbstractCrudService<Book, Long> {
 
     public Integer countAllBooks() {
         return bookRepository.countAllBooks();
+    }
+
+    @Transactional
+    public void deleteAllBooksByAuthor(Long authorID) {
+        Collection<Book> booksByAuthor = findBooksByAuthor(authorID);
+        for (Book book : booksByAuthor) {
+            deleteById(book.getId());
+        }
     }
 }
