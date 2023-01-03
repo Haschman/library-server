@@ -1,6 +1,6 @@
 package haschman.library_server.api.model;
 
-import jakarta.validation.constraints.*;
+import javax.validation.constraints.*;
 
 import java.time.Year;
 import java.util.HashSet;

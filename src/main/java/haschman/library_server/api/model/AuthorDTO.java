@@ -1,7 +1,7 @@
 package haschman.library_server.api.model;
 
 
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 
 public class AuthorDTO {
     private Long id;

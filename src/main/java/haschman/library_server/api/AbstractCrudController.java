@@ -4,7 +4,7 @@ import haschman.library_server.business.AbstractCrudService;
 import haschman.library_server.business.EntityNotFoundException;
 import haschman.library_server.business.EntityStateException;
 import haschman.library_server.domain.DomainEntity;
-import jakarta.validation.Valid;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.function.Function;
 

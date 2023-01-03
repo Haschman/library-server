@@ -1,6 +1,6 @@
 package haschman.library_server.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.Year;
 import java.util.HashSet;

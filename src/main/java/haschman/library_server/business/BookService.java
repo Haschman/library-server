@@ -2,9 +2,9 @@ package haschman.library_server.business;
 
 import haschman.library_server.dao.BookRepository;
 import haschman.library_server.domain.Book;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 
 @Component
