@@ -1,6 +1,9 @@
 # Databáze knihovny - server
 
-Práce bude zprostředkovávat správu domácí knihovny. Bude evidovat vlastněné knihy a jejich umístění v knihovně.</br>
+Kompilace serveru: `./gradlew bootBuildImage` <br>
+Server lze spustit příkazem `docker-compose up.` <br>
+Adresa serveru je nastavená na http://localhost:8080/ <br>
+Dokumentace API je na adrese http://localhost:5000/ <br>
 ### Relační schéma:
 <br>
 <p style="text-align:center; width: 90%"><img src="./relacni_schema/relacni_schema.png" alt="Relacni schema"></p>
