@@ -1,6 +1,9 @@
 # Databáze knihovny - server
 
-Práce bude zprostředkovávat správu domácí knihovny. Bude evidovat vlastněné knihy a jejich umístění v knihovně. Dále bude ukládat záznamy o výpůjčkách a kontrolovat dostupnost knih.</br>
+Kompilace serveru: `./gradlew bootBuildImage` <br>
+Server lze spustit příkazem `docker-compose up.` <br>
+Adresa serveru je nastavená na http://localhost:8080/ <br>
+Dokumentace API je na adrese http://localhost:5000/ <br>
 ### Relační schéma:
 <br>
 <p style="text-align:center; width: 90%"><img src="./relacni_schema/relacni_schema.png" alt="Relacni schema"></p>
@@ -19,8 +22,16 @@ V programu bude možné vznést dotaz na vypsání všech současně zapůjčen�
 Knihy bude možné vyhledávat i podle autorů, národnosti autorů a v případě uvedení i podle období, ve kterém autoři vydávali.<br>
 <hr>
 
-## ToDo
-- Authorova národnost by měla být pouze dobrovolný atribut - změnit v relačním schématu
-- Zjistit jak kontrolovat správnost parametrů u konstruktorů - příklad u Location
-- Zjistit jak udělat slabou entitu. Jak vracet několik ID a jak je ukládat.
-- Změnit Vector na Set/List
+## Dokončeno:
+- Kompletní implementace entit: Book, Author a location
+- Controllery implementovaných entit
+- HTTP kódy s chybovými hláškami
+- Convertory a reprezentace pomocí DTO
+- Knihy lze filtrovat podle authorů a lokací, pomocí těchto filtrů je možné knihy hromadně mazat.
+- Funkce na sečtení včech knih nebo všech autorů - může být použito jako statistika pro klienta
+- Dokumentace
+
+## TODO:
+- Implementace entit: Borrowing a User
+- Operace s půjčováním knih - kontrola dostupnosti
+- Další filtry na vyhledávání knih
