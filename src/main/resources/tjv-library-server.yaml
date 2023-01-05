@@ -41,20 +41,20 @@ paths:
         '400':
           description: 'Bad request - Something is missing or incorrect value'
         '409':
-          description: 'Conflict - You are trying to create an entity that already exists.'
+          description: 'Conflict - You are trying to create a location that already exists.'
 
   /locations/{id}:
     get:
       tags:
         - location
       operationId: readOne
+      description: 'Get location with given ID'
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
@@ -62,17 +62,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LocationDTO'
+        '404':
+          description: "Not found - This location does not exists."
     put:
       tags:
         - location
       operationId: update
+      description: "Update location"
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       requestBody:
         content:
           application/json:
@@ -82,20 +84,30 @@ paths:
       responses:
         '204':
           description: No Content
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: "Not found - This location does not exists."
+        '409':
+          description: 'Conflict - You are trying to update this location to a location that already exists.'
     delete:
       tags:
         - location
       operationId: delete
+      description: "Delete location"
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
+        '400':
+          description: 'Bad request - There are books that are saved with this location. First you have to delete them or change their location.'
+        '404':
+          description: "Not found - This location does not exists."
 
 
 
@@ -117,6 +129,7 @@ paths:
       tags:
         - book
       operationId: create_1
+      description: 'Create a book'
       requestBody:
         content:
           application/json:
@@ -133,25 +146,25 @@ paths:
         '400':
           description: 'Bad request - Something is missing or incorrect value'
         '404':
-          description: 'Not found - You are trying to create a new entity that contains another entity that does not exist.'
+          description: 'Not found - You are trying to create a new book that contains another entity (author or location) that does not exist.'
         '409':
-          description: 'Conflict - You are trying to create an entity that already exists.'
+          description: 'Conflict - You are trying to create a book that already exists.'
 
   /books/location:
     get:
       tags:
         - book
       operationId: findAllFromLocation
+      description: 'Read all books from given location'
       parameters:
         - name: locationID
           in: query
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
-          description: OK
+          description: "OK - If the location does not exist, it will return an empty array."
           content:
             application/json:
               schema:
@@ -168,7 +181,6 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
@@ -178,6 +190,7 @@ paths:
       tags:
         - book
       operationId: countAllBooks
+      description: "Returns the number of books in the database."
       responses:
         '200':
           description: OK
@@ -185,23 +198,22 @@ paths:
             application/json:
               schema:
                 type: integer
-                format: int32
 
   /books/author:
     get:
       tags:
         - book
       operationId: findAllByAuthor
+      description: 'Read all books by given author'
       parameters:
         - name: authorID
           in: query
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
-          description: OK
+          description: "OK - If the author does not exist, it will return an empty array."
           content:
             application/json:
               schema:
@@ -218,7 +230,6 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
@@ -228,14 +239,13 @@ paths:
       tags:
         - book
       operationId: readOne_1
-      description: 'Read all books'
+      description: 'Get book with given ID'
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
@@ -243,17 +253,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookDTO'
+        '404':
+          description: "Not found - This book does not exists."
     put:
       tags:
         - book
       operationId: update_1
+      description: "Update book"
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       requestBody:
         content:
           application/json:
@@ -263,20 +275,28 @@ paths:
       responses:
         '204':
           description: No Content
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: "Not found - This book does not exists."
+        '409':
+          description: 'Conflict - You are trying to update this book to a book that already exists.'
     delete:
       tags:
         - book
       operationId: delete_1
+      description: "Delete book"
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
+        '404':
+          description: "Not found - This book does not exists."
 
 
 
@@ -299,6 +319,7 @@ paths:
       tags:
         - author
       operationId: create_2
+      description: 'Create an author'
       requestBody:
         content:
           application/json:
@@ -315,13 +336,14 @@ paths:
         '400':
           description: 'Bad request - Something is missing or incorrect value'
         '409':
-          description: 'Conflict - You are trying to create an entity that already exists.'
+          description: 'Conflict - You are trying to create an author that already exists.'
 
   /authors/count:
     get:
       tags:
         - author
       operationId: countAllAuthors
+      description: "Returns the number of authors in the database."
       responses:
         '200':
           description: OK
@@ -329,20 +351,19 @@ paths:
             application/json:
               schema:
                 type: integer
-                format: int32
 
   /authors/{id}:
     get:
       tags:
         - author
       operationId: readOne_2
+      description: 'Get author with given ID'
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
@@ -350,17 +371,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorDTO'
+        '404':
+          description: "Not found - This author does not exists."
     put:
       tags:
         - author
       operationId: update_2
+      description: "Update author"
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       requestBody:
         content:
           application/json:
@@ -370,20 +393,31 @@ paths:
       responses:
         '204':
           description: No Content
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: "Not found - This author does not exists."
+        '409':
+          description: 'Conflict - You are trying to update this author to an author that already exists.'
     delete:
       tags:
         - author
       operationId: delete_2
+      description: "Delete location"
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: OK
+        '400':
+          description: 'Bad request - There are books that are saved with this author. First you have to delete them or change their author.'
+        '404':
+          description: "Not found - This author does not exists."
+
 
 
 components:
@@ -419,13 +453,8 @@ components:
         language:
           type: string
         publicationYear:
-          type: object
-          properties:
-            value:
-              type: integer
-              format: int32
-            leap:
-              type: boolean
+          type: integer
+          format: int32
         category:
           type: string
         genre:

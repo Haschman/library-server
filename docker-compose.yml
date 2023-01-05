@@ -22,16 +22,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://library_db/tjv_db
       SPRING_DATASOURCE_USERNAME: tjv
       SPRING_DATASOURCE_PASSWORD: tjv
-  swagger-editor:
-    image: swaggerapi/swagger-editor
-    logging:
-      driver: none
-    ports:
-      - '5555:8080'
-    volumes:
-      - ./src/main/resources:/open-apis
-    environment:
-      - SWAGGER_JSON=/open-apis/tjv-library-server.yaml
+
   swagger-ui:
     image: swaggerapi/swagger-ui
     logging:

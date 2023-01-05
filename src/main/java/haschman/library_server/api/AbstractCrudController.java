@@ -88,8 +88,8 @@ public class AbstractCrudController<E extends DomainEntity<ID>, D, ID> {
             service.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (EntityNotFoundException e) {
-            System.out.println("ERROR Something is missing: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR Something is missing: " + e.getMessage());
+            System.out.println("ERROR missing: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR missing: " + e.getMessage());
         } catch (DataIntegrityViolationException e) {
             System.out.println("ERROR: You are trying to delete something that other items use. Delete them first or just remove the use of this one.");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ERROR: You are trying to delete something that other items use. Delete them first or just remove the use of this one.");
