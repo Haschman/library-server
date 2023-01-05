@@ -1,0 +1,492 @@
+openapi: 3.0.1
+info:
+  title: Library server API
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080
+paths:
+  /locations:
+    get:
+      tags:
+        - location
+      operationId: readAll
+      description: 'Read all locations'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationDTO'
+    post:
+      tags:
+        - location
+      operationId: create
+      description: 'Create a location'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationDTO'
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '409':
+          description: 'Conflict - You are trying to create a location that already exists.'
+
+  /locations/{id}:
+    get:
+      tags:
+        - location
+      operationId: readOne
+      description: 'Get location with given ID'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationDTO'
+        '404':
+          description: "Not found - This location does not exists."
+    put:
+      tags:
+        - location
+      operationId: update
+      description: "Update location"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationDTO'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: "Not found - This location does not exists."
+        '409':
+          description: 'Conflict - You are trying to update this location to a location that already exists.'
+    delete:
+      tags:
+        - location
+      operationId: delete
+      description: "Delete location"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: 'Bad request - There are books that are saved with this location. First you have to delete them or change their location.'
+        '404':
+          description: "Not found - This location does not exists."
+
+
+
+  /books:
+    get:
+      tags:
+        - book
+      operationId: readAll_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDTO'
+    post:
+      tags:
+        - book
+      operationId: create_1
+      description: 'Create a book'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: 'Not found - You are trying to create a new book that contains another entity (author or location) that does not exist.'
+        '409':
+          description: 'Conflict - You are trying to create a book that already exists.'
+
+  /books/location:
+    get:
+      tags:
+        - book
+      operationId: findAllFromLocation
+      description: 'Read all books from given location'
+      parameters:
+        - name: locationID
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "OK - If the location does not exist, it will return an empty array."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDTO'
+    delete:
+      tags:
+        - book
+      operationId: deleteAllBooksFromLocation
+      parameters:
+        - name: locationID
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+
+  /books/count:
+    get:
+      tags:
+        - book
+      operationId: countAllBooks
+      description: "Returns the number of books in the database."
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+
+  /books/author:
+    get:
+      tags:
+        - book
+      operationId: findAllByAuthor
+      description: 'Read all books by given author'
+      parameters:
+        - name: authorID
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "OK - If the author does not exist, it will return an empty array."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDTO'
+    delete:
+      tags:
+        - book
+      operationId: deleteAllBooksByAuthor
+      parameters:
+        - name: authorID
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+
+  /books/{id}:
+    get:
+      tags:
+        - book
+      operationId: readOne_1
+      description: 'Get book with given ID'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '404':
+          description: "Not found - This book does not exists."
+    put:
+      tags:
+        - book
+      operationId: update_1
+      description: "Update book"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDTO'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: "Not found - This book does not exists."
+        '409':
+          description: 'Conflict - You are trying to update this book to a book that already exists.'
+    delete:
+      tags:
+        - book
+      operationId: delete_1
+      description: "Delete book"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: "Not found - This book does not exists."
+
+
+
+  /authors:
+    get:
+      tags:
+        - author
+      operationId: readAll_2
+      description: 'Read all authors'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthorDTO'
+    post:
+      tags:
+        - author
+      operationId: create_2
+      description: 'Create an author'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorDTO'
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '409':
+          description: 'Conflict - You are trying to create an author that already exists.'
+
+  /authors/count:
+    get:
+      tags:
+        - author
+      operationId: countAllAuthors
+      description: "Returns the number of authors in the database."
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+
+  /authors/{id}:
+    get:
+      tags:
+        - author
+      operationId: readOne_2
+      description: 'Get author with given ID'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorDTO'
+        '404':
+          description: "Not found - This author does not exists."
+    put:
+      tags:
+        - author
+      operationId: update_2
+      description: "Update author"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorDTO'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: 'Bad request - Something is missing or incorrect value'
+        '404':
+          description: "Not found - This author does not exists."
+        '409':
+          description: 'Conflict - You are trying to update this author to an author that already exists.'
+    delete:
+      tags:
+        - author
+      operationId: delete_2
+      description: "Delete location"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: 'Bad request - There are books that are saved with this author. First you have to delete them or change their author.'
+        '404':
+          description: "Not found - This author does not exists."
+
+
+
+components:
+  schemas:
+    LocationDTO:
+      required:
+        - shelf
+        - stand
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        stand:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+        shelf:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+    BookDTO:
+      required:
+        - language
+        - location
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        language:
+          type: string
+        publicationYear:
+          type: integer
+          format: int32
+        category:
+          type: string
+        genre:
+          type: string
+        location:
+          type: integer
+          format: int64
+        authors:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        isbn:
+          type: string
+    AuthorDTO:
+      required:
+        - surname
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        surname:
+          type: string
+        nationality:
+          type: string
+        century:
+          type: integer
+          format: int32
